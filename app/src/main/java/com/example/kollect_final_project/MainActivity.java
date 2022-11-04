@@ -2,9 +2,11 @@ package com.example.kollect_final_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.os.Handler;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +33,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
     RequestQueue requestQueue;
 
     Connection connect;
@@ -41,6 +43,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bt;
     TextView tx1;
 
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+
+            switch (msg.what){
+                case 0x11:
+                    String s = (String) msg.obj;
+                    tx1.setText(s);
+                    break;
+
+                case 0x12:
+                    String ss = (String) msg.obj;
+                    tx1.setText(ss);
+                    break;
+            }
+
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tx1 = (TextView) findViewById(R.id.textView);
         bt = findViewById(R.id.button);
-        bt.setOnClickListener(this);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,27 +99,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    @Override
-    public void onClick(View view){
-        if (view.getId() == R.id.button){
-            StringRequest stringRequest = new StringRequest(Request.Method.POST,Base_Url,
-                    response -> tx1.setText(response),
-                    error ->  Log.w("Error",error.getMessage())){
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError{
-                    Map<String, String> params = new HashMap<>();
-                    params.put("name", "Jenny");
-                    params.put("Groups", "Card");
-                    params.put("price", "100");
-                    return params;
-                }
+    private void setListener() {
 
-            };
-            requestQueue = Volley.newRequestQueue(MainActivity.this);
-            requestQueue.add(stringRequest);
+        // 按钮点击事件
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        }
+                // 创建一个线程来连接数据库并获取数据库中对应表的数据
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 调用数据库工具类DBUtils的getInfoByName方法获取数据库表中数据
+                        HashMap<String, Object> map = com.example.administrator.mysqldemo.DBUtils.getInfoByName("Charger9527");
+                        Message message = handler.obtainMessage();
+                        if(map != null){
+                            String s = "";
+                            for (String key : map.keySet()){
+                                s += key + ":" + map.get(key) + "\n";
+                            }
+                            message.what = 0x12;
+                            message.obj = s;
+                        }else {
+                            message.what = 0x11;
+                            message.obj = "查询结果为空";
+                        }
+                        // 发消息通知主线程更新UI
+                        handler.sendMessage(message);
+                    }
+                }).start();
+
+            }
+        });
+
     }
+
+//    @Override
+//    public void onClick(View view){
+//        if (view.getId() == R.id.button){
+//            StringRequest stringRequest = new StringRequest(Request.Method.POST,Base_Url,
+//                    response -> tx1.setText(response),
+//                    error ->  Log.w("Error",error.getMessage())){
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError{
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put("name", "Jenny");
+//                    params.put("Groups", "Card");
+//                    params.put("price", "100");
+//                    return params;
+//                }
+//
+//            };
+//            requestQueue = Volley.newRequestQueue(MainActivity.this);
+//            requestQueue.add(stringRequest);
+//
+//        }
+//    }
 //    public void GetTextFromSql(View v){
 //        TextView tx1 = (TextView) findViewById(R.id.texttxt);
 //
