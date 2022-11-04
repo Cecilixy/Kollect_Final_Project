@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity{
     Connection connect;
     String connectionRes = "";
 
-    private final String Base_Url = "http://10.239.89.53/Kollectdata/getArtist.php";
+    // private final String Base_Url = "http://10.239.89.53/Kollectdata/getArtist.php";
     Button bt;
     TextView tx1;
 
@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
 
         tx1 = (TextView) findViewById(R.id.textView);
         bt = findViewById(R.id.button);
+        setListener();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity{
                     @Override
                     public void run() {
                         // 调用数据库工具类DBUtils的getInfoByName方法获取数据库表中数据
-                        HashMap<String, Object> map = com.example.administrator.mysqldemo.DBUtils.getInfoByName("Charger9527");
+                        HashMap<String, Object> map = DBUtils.getInfoByName("Blackpink");
                         Message message = handler.obtainMessage();
                         if(map != null){
                             String s = "";

@@ -1,4 +1,4 @@
-package com.example.administrator.mysqldemo;
+package com.example.kollect_final_project;
 
 import android.content.Context;
 import android.util.Log;
@@ -31,7 +31,7 @@ public class DBUtils {
         Connection connection = null;
         try{
             Class.forName(driver);// 动态加载类
-            String ip = "192.168.3.61";// 写成本机地址，不能写成localhost，同时手机和电脑连接的网络必须是同一个
+            String ip = "192.168.50.38";// 写成本机地址，不能写成localhost，同时手机和电脑连接的网络必须是同一个
 
             // 尝试建立到给定数据库URL的连接
             connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/" + dbName,
@@ -48,13 +48,14 @@ public class DBUtils {
 
         HashMap<String, Object> map = new HashMap<>();
         // 根据数据库名称，建立连接
-        Connection connection = getConn("map_designer_test_db");
+        Connection connection = getConn("Kdata");
 
         try {
             // mysql简单的查询语句。这里是根据MD_CHARGER表的NAME字段来查询某条记录
-            String sql = "select * from MD_CHARGER where NAME = ?";
+            String sql = "select * from Artist where name = ?";
 //            String sql = "select * from MD_CHARGER";
             if (connection != null){// connection不为null表示与数据库建立了连接
+                Log.e("DBUtils","连接成功");
                 PreparedStatement ps = connection.prepareStatement(sql);
                 if (ps != null){
                     // 设置上面的sql语句中的？的值为name
