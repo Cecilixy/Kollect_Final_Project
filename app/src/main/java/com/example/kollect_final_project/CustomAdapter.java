@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
@@ -44,9 +46,11 @@ public class CustomAdapter extends BaseAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.data_item, null, true);
 
-            holder.tvname = (TextView) convertView.findViewById(R.id.name);
+            holder.tvSellername = (TextView) convertView.findViewById(R.id.seller_name);
+            holder.tvArtistname = (TextView) convertView.findViewById(R.id.artist_name);
             holder.tvgroups = (TextView) convertView.findViewById(R.id.groups);
             holder.tvprice= (TextView) convertView.findViewById(R.id.price);
+            holder.tvstatus = (TextView) convertView.findViewById(R.id.status);
 
 
             convertView.setTag(holder);
@@ -55,15 +59,17 @@ public class CustomAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.tvname.setText("Name: "+ posts.get(position).getName());
-        holder.tvgroups.setText("Groups: "+ posts.get(position).getGroups());
+        holder.tvSellername.setText("Seller Name: "+ posts.get(position).getSellerName());
+        holder.tvArtistname.setText("Artist Name: "+ posts.get(position).getArtistName());
+        holder.tvgroups.setText("Artist Groups: "+ posts.get(position).getGroups());
         holder.tvprice.setText("Price: "+ posts.get(position).getPrice());
+        holder.tvstatus.setText("Status: "+ posts.get(position).getStatus());
 
         return convertView;
     }
 
     private class ViewHolder {
 
-        protected TextView tvname, tvgroups, tvprice;
+        protected TextView tvSellername, tvArtistname,tvgroups, tvprice, tvstatus;
     }
 }

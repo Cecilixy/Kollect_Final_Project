@@ -8,39 +8,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000"
+        android:background="#82B1FF"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/seller_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingLeft="10dp"
-            android:text="Name" />
+            android:text="Seller Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/artist_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Artist Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
 
         <TextView
             android:id="@+id/groups"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingLeft="10dp"
-            android:text="Groups" />
+            android:text="Artist Groups"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
 
         <TextView
             android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingLeft="10dp"
-            android:text="Price" />
+            android:text="Price"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Status"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
 
 
     </LinearLayout>

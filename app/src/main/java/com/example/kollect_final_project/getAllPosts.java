@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
             databaseHelper = new MySQLiteOpenHelper(this);
 
-            userModelArrayList = databaseHelper.getAllArtists();
+            userModelArrayList = databaseHelper.getAllPosts();
 
             customAdapter = new CustomAdapter(this,userModelArrayList);
             listView.setAdapter(customAdapter);

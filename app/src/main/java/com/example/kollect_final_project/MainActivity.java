@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
     TextView tx1;
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
-    private EditText etname, etgroups, etprice;
+    private EditText etsname, etgroups, etprice,etaname,etstatus;
 
 
 
@@ -41,15 +41,19 @@ public class MainActivity extends AppCompatActivity{
 
         btnStore = (Button) findViewById(R.id.btnstore);
         btnGetall = (Button) findViewById(R.id.btnget);
-        etname = (EditText) findViewById(R.id.etname);
+        etsname = (EditText) findViewById(R.id.etsname);
+        etaname = (EditText) findViewById(R.id.etaname);
+        etstatus = (EditText) findViewById(R.id.etstatus);
         etgroups = (EditText) findViewById(R.id.etgroup);
         etprice = (EditText) findViewById(R.id.etprice);
 
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbManager.insertArtist(etname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()));
-                etname.setText("");
+                dbManager.insertPost(etsname.getText().toString(), etaname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()));
+                etsname.setText("");
+                etaname.setText("");
+                etstatus.setText("");
                 etgroups.setText("");
                 etprice.setText("");
                 Toast.makeText(MainActivity.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();

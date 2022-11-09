@@ -3,31 +3,45 @@ package com.example.kollect_final_project;
 import java.io.Serializable;
 
 public class Post implements Serializable {
-    private int id,price;
-    private String objectName,groupName;
+    private int id,price, status;
+    private String seller_name,artist_name,artist_group;
 
     public void setGroups(String nGroups) {
-        this.groupName = nGroups;
+        this.artist_group = nGroups;
     }
 
     public void setPrice(int newPrice) {
         this.price = newPrice;
     }
 
-    public void setName(String newname) {
-        this.objectName = newname;
+    public void setSellerName(String newname) {
+        this.seller_name = newname;
     }
+
+    public void setArtistname(String newname) {
+        this.artist_name = newname;
+    }
+
 
     public void setId(int newId) {
         this.id = newId;
     }
 
-    public int getId( ) {
+    public void setStatus(int nstatus) {
+        this.status = nstatus;
+    }
+
+
+    public int getId() {
         return id;
     }
 
-    public String getName( ) {
-        return objectName;
+    public String getSellerName() {
+        return seller_name;
+    }
+
+    public String getArtistName(){
+        return artist_name;
     }
 
     public int getPrice( ) {
@@ -35,7 +49,11 @@ public class Post implements Serializable {
     }
 
     public String getGroups( ) {
-        return groupName;
+        return artist_group;
+    }
+
+    public int getStatus(){
+        return status;
     }
 
 }
