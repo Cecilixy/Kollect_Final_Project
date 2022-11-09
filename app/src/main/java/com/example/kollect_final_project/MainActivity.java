@@ -36,37 +36,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        dbManager = new MySQLiteOpenHelper(this);
-
-
-        btnStore = (Button) findViewById(R.id.btnstore);
-        btnGetall = (Button) findViewById(R.id.btnget);
-        etsname = (EditText) findViewById(R.id.etsname);
-        etaname = (EditText) findViewById(R.id.etaname);
-        etstatus = (EditText) findViewById(R.id.etstatus);
-        etgroups = (EditText) findViewById(R.id.etgroup);
-        etprice = (EditText) findViewById(R.id.etprice);
-
-        btnStore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dbManager.insertPost(etsname.getText().toString(), etaname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()));
-                etsname.setText("");
-                etaname.setText("");
-                etstatus.setText("");
-                etgroups.setText("");
-                etprice.setText("");
-                Toast.makeText(MainActivity.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnGetall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, getAllPosts.class);
-                startActivity(intent);
-            }
-        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -95,6 +64,11 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    public void newActivity(View v){
+        Intent i = new Intent(MainActivity.this, AddPost.class);
+        startActivity(i);
     }
 
 

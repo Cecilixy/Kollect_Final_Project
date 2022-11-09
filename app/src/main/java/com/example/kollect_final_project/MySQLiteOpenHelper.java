@@ -149,81 +149,81 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
 
     //添加数据
-    public void insertUser(String user_name, String password, String gender, String instagram_id){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("user_name", user_name);
-        values.put("password", password);
-        values.put("gender", gender);
-        values.put("insta_id", instagram_id);
-        db.insert(TABLE_NAME_USER,null,values);
-    }
-    //根据学号删除信息 防止有重名的同学
-    public void deleteUserFromDbByNumber(int number){
-        SQLiteDatabase db=getWritableDatabase();
-        //返回的是删除的条数
-        db.delete(TABLE_NAME_USER, KEY_ID + " = ?",new String[]{String.valueOf(number)});
-    }
-    //修改数据
-    public void updateUser(int id, String user_name, String password, String gender, String instagram_id){
-        SQLiteDatabase db=getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("user_name", user_name);
-        values.put("password", password);
-        values.put("gender", gender);
-        values.put("insta_id", instagram_id);
-        //依旧是根据学号改
-        db.update(TABLE_NAME_USER, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
-    }
-    //查询数据
-    public ArrayList<Artist> selectUser(int number){
-        SQLiteDatabase db=getWritableDatabase();
-        ArrayList<Artist> artistList=new ArrayList<>();
-        Cursor cursor=db.query(TABLE_NAME_ARTIST,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
-        if(cursor!=null){
-            while (cursor.moveToNext()){
-                int name1=cursor.getColumnIndex("name");
-                String name= cursor.getString(name1);
-                int groups1=cursor.getColumnIndex("groups");
-                String groups= cursor.getString(groups1);
-                int price1=cursor.getColumnIndex("price");
-                int price= cursor.getInt(price1);
-
-
-                Artist artist=new Artist();
-                artist.setName(name);
-                artist.setGroups(groups);
-                artist.setPrice(price);
-
-
-                artistList.add(artist);
-            }
-            cursor.close();
-        }
-        return artistList;
-    }
-
-    @SuppressLint("Range")
-    public ArrayList<Artist> getAllArtists( ) {
-        String sqlQuery = "select * from " + TABLE_NAME_ARTIST;
-
-        SQLiteDatabase db = this.getWritableDatabase( );
-        Cursor cursor = db.rawQuery( sqlQuery, null );
-
-        ArrayList<Artist> artists = new ArrayList<Artist>( );
-        while( cursor.moveToNext( ) ) {
-            Artist artist
-                    = new Artist();
-            artist.setId(cursor.getInt(cursor.getColumnIndex("id")));
-            artist.setName(cursor.getString(cursor.getColumnIndex("name")));
-            artist.setGroups(cursor.getString(cursor.getColumnIndex("groups")));
-            artist.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
-
-            artists.add(artist);
-        }
-        db.close( );
-        return artists;
-    }
+//    public void insertUser(String user_name, String password, String gender, String instagram_id){
+//        SQLiteDatabase db = getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("user_name", user_name);
+//        values.put("password", password);
+//        values.put("gender", gender);
+//        values.put("insta_id", instagram_id);
+//        db.insert(TABLE_NAME_USER,null,values);
+//    }
+//    //根据学号删除信息 防止有重名的同学
+//    public void deleteUserFromDbByNumber(int number){
+//        SQLiteDatabase db=getWritableDatabase();
+//        //返回的是删除的条数
+//        db.delete(TABLE_NAME_USER, KEY_ID + " = ?",new String[]{String.valueOf(number)});
+//    }
+//    //修改数据
+//    public void updateUser(int id, String user_name, String password, String gender, String instagram_id){
+//        SQLiteDatabase db=getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("user_name", user_name);
+//        values.put("password", password);
+//        values.put("gender", gender);
+//        values.put("insta_id", instagram_id);
+//        //依旧是根据学号改
+//        db.update(TABLE_NAME_USER, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+//    }
+//    //查询数据
+//    public ArrayList<Artist> selectUser(int number){
+//        SQLiteDatabase db=getWritableDatabase();
+//        ArrayList<Artist> artistList=new ArrayList<>();
+//        Cursor cursor=db.query(TABLE_NAME_ARTIST,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
+//        if(cursor!=null){
+//            while (cursor.moveToNext()){
+//                int name1=cursor.getColumnIndex("name");
+//                String name= cursor.getString(name1);
+//                int groups1=cursor.getColumnIndex("groups");
+//                String groups= cursor.getString(groups1);
+//                int price1=cursor.getColumnIndex("price");
+//                int price= cursor.getInt(price1);
+//
+//
+//                Artist artist=new Artist();
+//                artist.setName(name);
+//                artist.setGroups(groups);
+//                artist.setPrice(price);
+//
+//
+//                artistList.add(artist);
+//            }
+//            cursor.close();
+//        }
+//        return artistList;
+//    }
+//
+//    @SuppressLint("Range")
+//    public ArrayList<Artist> getAllArtists( ) {
+//        String sqlQuery = "select * from " + TABLE_NAME_ARTIST;
+//
+//        SQLiteDatabase db = this.getWritableDatabase( );
+//        Cursor cursor = db.rawQuery( sqlQuery, null );
+//
+//        ArrayList<Artist> artists = new ArrayList<Artist>( );
+//        while( cursor.moveToNext( ) ) {
+//            Artist artist
+//                    = new Artist();
+//            artist.setId(cursor.getInt(cursor.getColumnIndex("id")));
+//            artist.setName(cursor.getString(cursor.getColumnIndex("name")));
+//            artist.setGroups(cursor.getString(cursor.getColumnIndex("groups")));
+//            artist.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+//
+//            artists.add(artist);
+//        }
+//        db.close( );
+//        return artists;
+//    }
 
 
 }
