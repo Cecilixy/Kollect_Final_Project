@@ -9,15 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME="KollectData.db";//数据库名字
-    private static final String TABLE_NAME_ARTIST="Artist";//表的名字
+    private static final String TABLE_NAME_POSTS="Post";//表的名字
     private static final String KEY_ID = "id";
     //创建表
-    private static final String CREATE_TABLE_SQL="create table "+TABLE_NAME_ARTIST +"(id integer primary key autoincrement,name text,groups text,price integer )";
+    private static final String CREATE_TABLE_SQL="create table "+TABLE_NAME_POSTS +"(id integer primary key autoincrement,name text,groups text,price integer )";
 
     public MySQLiteOpenHelper(Context context){
         super(context,DB_NAME,null,1);
@@ -148,13 +147,13 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("name",name);
         values.put("groups",groups);
         values.put("price",price);
-        db.insert(TABLE_NAME_ARTIST,null,values);
+        db.insert(TABLE_NAME_POSTS,null,values);
     }
     //根据学号删除信息 防止有重名的同学
     public void deleteArtistFromDbByNumber(int number){
         SQLiteDatabase db=getWritableDatabase();
         //返回的是删除的条数
-        db.delete(TABLE_NAME_ARTIST, KEY_ID + " = ?",new String[]{String.valueOf(number)});
+        db.delete(TABLE_NAME_POSTS, KEY_ID + " = ?",new String[]{String.valueOf(number)});
     }
     //修改数据
     public void updateArtist(int id,String name,String groups,int price){
@@ -164,13 +163,13 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("groups",groups);
         values.put("price",price);
         //依旧是根据学号改
-        db.update(TABLE_NAME_ARTIST, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        db.update(TABLE_NAME_POSTS, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
     }
     //查询数据
-    public ArrayList<Artist> selectArtist(int number){
+    public ArrayList<Post> selectArtist(int number){
         SQLiteDatabase db=getWritableDatabase();
-        ArrayList<Artist> artistList=new ArrayList<>();
-        Cursor cursor=db.query(TABLE_NAME_ARTIST,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
+        ArrayList<Post> postList =new ArrayList<>();
+        Cursor cursor=db.query(TABLE_NAME_POSTS,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
         if(cursor!=null){
             while (cursor.moveToNext()){
                 int name1=cursor.getColumnIndex("name");
@@ -181,38 +180,38 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 int price= cursor.getInt(price1);
 
 
-                Artist artist=new Artist();
-                artist.setName(name);
-                artist.setGroups(groups);
-                artist.setPrice(price);
+                Post post =new Post();
+                post.setName(name);
+                post.setGroups(groups);
+                post.setPrice(price);
 
 
-                artistList.add(artist);
+                postList.add(post);
             }
             cursor.close();
         }
-        return artistList;
+        return postList;
     }
 
     @SuppressLint("Range")
-    public ArrayList<Artist> getAllArtists( ) {
-        String sqlQuery = "select * from " + TABLE_NAME_ARTIST;
+    public ArrayList<Post> getAllArtists( ) {
+        String sqlQuery = "select * from " + TABLE_NAME_POSTS;
 
         SQLiteDatabase db = this.getWritableDatabase( );
         Cursor cursor = db.rawQuery( sqlQuery, null );
 
-        ArrayList<Artist> artists = new ArrayList<Artist>( );
+        ArrayList<Post> posts = new ArrayList<Post>( );
         while( cursor.moveToNext( ) ) {
-            Artist artist
-                    = new Artist();
-            artist.setId(cursor.getInt(cursor.getColumnIndex("id")));
-            artist.setName(cursor.getString(cursor.getColumnIndex("name")));
-            artist.setGroups(cursor.getString(cursor.getColumnIndex("groups")));
-            artist.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+            Post post
+                    = new Post();
+            post.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            post.setName(cursor.getString(cursor.getColumnIndex("name")));
+            post.setGroups(cursor.getString(cursor.getColumnIndex("groups")));
+            post.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
 
-            artists.add(artist);
+            posts.add(post);
         }
         db.close( );
-        return artists;
+        return posts;
     }
 }

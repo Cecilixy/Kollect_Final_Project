@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
+    android:background="#CCFF90"
     android:orientation="vertical"
     tools:context="com.example.kollect_final_project.UpdateandDelete">
 
@@ -13,7 +13,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="Name"
-        android:textColor="#F00F"
+        android:textColor="#8C9EFF"
         android:textSize="20sp" />
 
     <EditText
@@ -32,7 +32,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="Groups"
-        android:textColor="#F00F"
+        android:textColor="#8C9EFF"
         android:textSize="20sp" />
 
     <EditText
@@ -51,7 +51,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="Price"
-        android:textColor="#F00F"
+        android:textColor="#8C9EFF"
         android:textSize="20sp" />
 
     <EditText

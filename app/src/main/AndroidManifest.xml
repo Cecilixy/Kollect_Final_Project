@@ -39,7 +39,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".getAllArtists"
+            android:name=".getAllPosts"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

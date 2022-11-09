@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
+    android:background="#B9F6CA"
     android:orientation="vertical"
-    tools:context="com.example.kollect_final_project.getAllArtists">
+    tools:context="com.example.kollect_final_project.getAllPosts">
 
     <TextView
         android:layout_width="match_parent"

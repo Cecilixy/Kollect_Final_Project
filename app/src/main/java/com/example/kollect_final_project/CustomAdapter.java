@@ -7,31 +7,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-
-
 import java.util.ArrayList;
 
 public class CustomAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Artist> artists;
+    private ArrayList<Post> posts;
 
-    public CustomAdapter(Context context, ArrayList<Artist> artists) {
+    public CustomAdapter(Context context, ArrayList<Post> posts) {
 
         this.context = context;
-        this.artists = artists;
+        this.posts = posts;
     }
 
     @Override
     public int getCount() {
-        return artists.size();
+        return posts.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return artists.get(i);
+        return posts.get(i);
     }
 
     @Override
@@ -60,9 +55,9 @@ public class CustomAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.tvname.setText("Name: "+artists.get(position).getName());
-        holder.tvgroups.setText("Groups: "+artists.get(position).getGroups());
-        holder.tvprice.setText("Price: "+artists.get(position).getPrice());
+        holder.tvname.setText("Name: "+ posts.get(position).getName());
+        holder.tvgroups.setText("Groups: "+ posts.get(position).getGroups());
+        holder.tvprice.setText("Price: "+ posts.get(position).getPrice());
 
         return convertView;
     }

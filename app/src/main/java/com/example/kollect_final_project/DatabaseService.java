@@ -26,18 +26,18 @@ public class DatabaseService {
         dbOpenHelper.getWritableDatabase().execSQL(sql);
     }
 
-    public void saveArtistInfo(Artist artist) {
+    public void saveArtistInfo(Post post) {
         dbOpenHelper.getWritableDatabase().execSQL(
                 "insert into config (name, groups, price) values(?,?,?)",
-                new Object[] { artist.getName(), artist.getGroups(),
-                        artist.getPrice()});
+                new Object[] { post.getName(), post.getGroups(),
+                        post.getPrice()});
     }
 
-    public void updateConfigInfo(Artist artist) {
+    public void updateConfigInfo(Post post) {
         dbOpenHelper.getWritableDatabase().execSQL(
                 "update config set name=?, groups=?, price=? where id=?",
-                new Object[] { artist.getName(), artist.getGroups(),
-                        artist.getPrice() });
+                new Object[] { post.getName(), post.getGroups(),
+                        post.getPrice() });
     }
 
 
@@ -46,15 +46,15 @@ public class DatabaseService {
                 .execSQL("delete from " + tableName + " where id=?",
                         new Object[] { id });
     }
-    public Artist findArtistInfo(Integer id) {
+    public Post findArtistInfo(Integer id) {
         Cursor cursor = dbOpenHelper.getWritableDatabase().rawQuery(
                 "select id,na,it,d from install where id=?",
                 new String[] { String.valueOf(id) });
         if (cursor.moveToNext()) {
-            Artist artist = new Artist();
+            Post post = new Post();
 
 
-            return artist;
+            return post;
         }
         return null;
     }

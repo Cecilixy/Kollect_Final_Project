@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class UpdateandDelete extends AppCompatActivity {
 
-    private Artist artist;
+    private Post post;
     private EditText etname, etgroups, etprice;
     private Button btnupdate, btndelete;
     private MySQLiteOpenHelper databaseHelper;
@@ -22,7 +22,7 @@ public class UpdateandDelete extends AppCompatActivity {
         setContentView(R.layout.activity_updateand_delete);
 
         Intent intent = getIntent();
-        artist = (Artist) intent.getSerializableExtra("user");
+        post = (Post) intent.getSerializableExtra("user");
 
         databaseHelper = new MySQLiteOpenHelper(this);
 
@@ -32,14 +32,14 @@ public class UpdateandDelete extends AppCompatActivity {
         btndelete = (Button) findViewById(R.id.btndelete);
         btnupdate = (Button) findViewById(R.id.btnupdate);
 
-        etname.setText(artist.getName());
-        etgroups.setText(artist.getGroups());
-        etprice.setText(String.valueOf(artist.getPrice()));
+        etname.setText(post.getName());
+        etgroups.setText(post.getGroups());
+        etprice.setText(String.valueOf(post.getPrice()));
 
         btnupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseHelper.updateArtist(artist.getId(),etname.getText().toString(),etgroups.getText().toString(),Integer.parseInt(etprice.getText().toString()));
+                databaseHelper.updateArtist(post.getId(),etname.getText().toString(),etgroups.getText().toString(),Integer.parseInt(etprice.getText().toString()));
                 Toast.makeText(UpdateandDelete.this, "Updated Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateandDelete.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -50,7 +50,7 @@ public class UpdateandDelete extends AppCompatActivity {
         btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseHelper.deleteArtistFromDbByNumber(artist.getId());
+                databaseHelper.deleteArtistFromDbByNumber(post.getId());
                 Toast.makeText(UpdateandDelete.this, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateandDelete.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

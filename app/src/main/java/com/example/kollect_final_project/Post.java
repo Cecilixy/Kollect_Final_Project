@@ -1,6 +1,8 @@
 package com.example.kollect_final_project;
 
-public class Artist {
+import java.io.Serializable;
+
+public class Post implements Serializable {
     private int id,price;
     private String objectName,groupName;
 
