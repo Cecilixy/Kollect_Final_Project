@@ -86,7 +86,7 @@
                 android:text="Add Group Tag"
                 />
 
-            <Button
+            <EditText
                 android:id="@+id/add_group_tag_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,8 +111,52 @@
                 android:text="Add Artist Tag"
                 />
 
-            <Button
+            <EditText
                 android:id="@+id/add_artist_tag_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/price_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:text="Price"
+                />
+
+            <EditText
+                android:id="@+id/price_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/upload_pic_display"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:text="Upload a Picture"
+                />
+
+            <Button
+                android:id="@+id/upload_pic_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
