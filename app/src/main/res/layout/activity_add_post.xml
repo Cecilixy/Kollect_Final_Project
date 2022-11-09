@@ -81,13 +81,14 @@
         android:background="#fff"
         android:hint="Enter Status"
         android:inputType="number" />
+
     <Button
         android:id="@+id/btnstore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="328dp"
+        android:layout_marginTop="441dp"
         android:text="Store" />
 
     <Button
@@ -96,8 +97,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="280dp"
-        android:text="Get All Users from SQLite" />
+        android:layout_marginTop="356dp"
+        android:text="Get All Posts from SQLite" />
 
     <Button
         android:id="@+id/btnback"
@@ -105,7 +106,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="386dp"
+        android:layout_marginTop="512dp"
         android:onClick="newActivity"
         android:text="Back to Home" />
 </RelativeLayout>
