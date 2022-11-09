@@ -50,6 +50,7 @@ public class CustomAdapter extends BaseAdapter {
             holder.tvArtistname = (TextView) convertView.findViewById(R.id.artist_name);
             holder.tvgroups = (TextView) convertView.findViewById(R.id.groups);
             holder.tvprice= (TextView) convertView.findViewById(R.id.price);
+            
             holder.tvstatus = (TextView) convertView.findViewById(R.id.status);
 
 
