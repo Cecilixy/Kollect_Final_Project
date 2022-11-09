@@ -16,16 +16,25 @@
 
 
     <Button
-        android:id="@+id/btnswitch"
+        android:id="@+id/btnAddPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="328dp"
-        android:onClick="newActivity"
-        android:text="Switch" />
+        android:layout_marginTop="405dp"
+        android:onClick="newPostActivity"
+        android:text="Add Post" />
 
-
+    <Button
+        android:id="@+id/btnAddUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="472dp"
+        android:layout_marginEnd="282dp"
+        android:onClick="newUserActivity"
+        android:text="Add User" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -36,8 +45,6 @@
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/menu_navigation" />
-
-
 
 
 </RelativeLayout>

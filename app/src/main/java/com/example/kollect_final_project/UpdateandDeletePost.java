@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class UpdateandDelete extends AppCompatActivity {
+public class UpdateandDeletePost extends AppCompatActivity {
 
     private Post post;
     private EditText etsname, etaname, etgroups, etprice,etstatus;
@@ -44,8 +44,8 @@ public class UpdateandDelete extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseHelper.updatePost(post.getId(),etsname.getText().toString(),etaname.getText().toString(),etgroups.getText().toString(),Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()));
-                Toast.makeText(UpdateandDelete.this, "Updated Successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UpdateandDelete.this,MainActivity.class);
+                Toast.makeText(UpdateandDeletePost.this, "Updated Successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UpdateandDeletePost.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -55,8 +55,8 @@ public class UpdateandDelete extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 databaseHelper.deletePostFromDbByNumber(post.getId());
-                Toast.makeText(UpdateandDelete.this, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(UpdateandDelete.this,MainActivity.class);
+                Toast.makeText(UpdateandDeletePost.this, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UpdateandDeletePost.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

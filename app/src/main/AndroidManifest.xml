@@ -18,6 +18,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AddUser"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddPost"
             android:exported="false">
             <meta-data
@@ -46,7 +53,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UpdateandDelete"
+            android:name=".UpdateandDeletePost"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

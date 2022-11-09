@@ -1,0 +1,59 @@
+package com.example.kollect_final_project;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class AddUser extends AppCompatActivity {
+
+    private MySQLiteOpenHelper dbManager;
+    private Button btnStore, btnGetall;
+    private EditText etUsername, etGender, etInstagramID, etPassword;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_user);
+
+        dbManager = new MySQLiteOpenHelper(this);
+
+
+        btnStore = (Button) findViewById(R.id.btnstore);
+        btnGetall = (Button) findViewById(R.id.btnget);
+        etUsername = (EditText) findViewById(R.id.etUsername);
+        etGender = (EditText) findViewById(R.id.etGender);
+        etInstagramID = (EditText) findViewById(R.id.etInstagramID);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+
+
+        btnStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbManager.insertUser(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                etUsername.setText("");
+                etPassword.setText("");
+                etGender.setText("");
+                etInstagramID.setText("");
+
+                Toast.makeText(AddUser.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnGetall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddUser.this, getAllPosts.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void newActivity(View v){
+        Intent i = new Intent(AddUser.this, MainActivity.class);
+        startActivity(i);
+    }
+}

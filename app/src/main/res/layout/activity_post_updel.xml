@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#CCFF90"
     android:orientation="vertical"
-    tools:context="com.example.kollect_final_project.UpdateandDelete">
+    tools:context="com.example.kollect_final_project.UpdateandDeletePost">
 
     <TextView
         android:layout_width="match_parent"

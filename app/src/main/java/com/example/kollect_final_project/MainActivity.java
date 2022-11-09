@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -66,8 +65,13 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public void newActivity(View v){
+    public void newPostActivity(View v){
         Intent i = new Intent(MainActivity.this, AddPost.class);
+        startActivity(i);
+    }
+
+    public void newUserActivity(View v){
+        Intent i = new Intent(MainActivity.this, AddUser.class);
         startActivity(i);
     }
 

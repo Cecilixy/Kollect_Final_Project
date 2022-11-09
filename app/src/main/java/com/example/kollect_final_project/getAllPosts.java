@@ -33,7 +33,7 @@ import java.util.ArrayList;
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getAllPosts.this, UpdateandDelete.class);
+                    Intent intent = new Intent(getAllPosts.this, UpdateandDeletePost.class);
                     intent.putExtra("user", userModelArrayList.get(position));
                     startActivity(intent);
                 }
