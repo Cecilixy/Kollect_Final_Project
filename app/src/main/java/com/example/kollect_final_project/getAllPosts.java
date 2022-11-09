@@ -19,7 +19,7 @@ import java.util.ArrayList;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_get_all_artists);
+            setContentView(R.layout.activity_get_all_posts);
 
             listView = (ListView) findViewById(R.id.listview);
 

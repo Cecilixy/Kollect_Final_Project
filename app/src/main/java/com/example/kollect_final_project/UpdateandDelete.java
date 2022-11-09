@@ -19,7 +19,7 @@ public class UpdateandDelete extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_updateand_delete);
+        setContentView(R.layout.activity_post_updel);
 
         Intent intent = getIntent();
         post = (Post) intent.getSerializableExtra("user");
