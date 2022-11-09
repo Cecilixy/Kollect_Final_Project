@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,29 +40,12 @@ public class MainActivity extends AppCompatActivity{
     Connection connect;
     String connectionRes = "";
 
-    // private final String Base_Url = "http://10.239.89.53/Kollectdata/getArtist.php";
     Button bt;
     TextView tx1;
+    private MySQLiteOpenHelper dbManager;
+    private Button btnStore, btnGetall;
+    private EditText etname, etgroups, etprice;
 
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-
-            switch (msg.what){
-                case 0x11:
-                    String s = (String) msg.obj;
-                    tx1.setText(s);
-                    break;
-
-                case 0x12:
-                    String ss = (String) msg.obj;
-                    tx1.setText(ss);
-                    break;
-            }
-
-        }
-    };
 
 
     @Override
@@ -69,9 +53,34 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tx1 = (TextView) findViewById(R.id.textView);
-        bt = findViewById(R.id.button);
-        setListener();
+        dbManager = new MySQLiteOpenHelper(this);
+
+
+        btnStore = (Button) findViewById(R.id.btnstore);
+        btnGetall = (Button) findViewById(R.id.btnget);
+        etname = (EditText) findViewById(R.id.etname);
+        etgroups = (EditText) findViewById(R.id.etgroup);
+        etprice = (EditText) findViewById(R.id.etprice);
+
+        btnStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbManager.insertArtist(etname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()));
+                etname.setText("");
+                etgroups.setText("");
+                etprice.setText("");
+                Toast.makeText(MainActivity.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnGetall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, getAllArtists.class);
+                startActivity(intent);
+            }
+        });
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -98,42 +107,10 @@ public class MainActivity extends AppCompatActivity{
                 return false;
             }
         });
-    }
-
-    private void setListener() {
-
-        // 按钮点击事件
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // 创建一个线程来连接数据库并获取数据库中对应表的数据
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // 调用数据库工具类DBUtils的getInfoByName方法获取数据库表中数据
-                        HashMap<String, Object> map = DBUtils.getInfoByName("Blackpink");
-                        Message message = handler.obtainMessage();
-                        if(map != null){
-                            String s = "";
-                            for (String key : map.keySet()){
-                                s += key + ":" + map.get(key) + "\n";
-                            }
-                            message.what = 0x12;
-                            message.obj = s;
-                        }else {
-                            message.what = 0x11;
-                            message.obj = "查询结果为空";
-                        }
-                        // 发消息通知主线程更新UI
-                        handler.sendMessage(message);
-                    }
-                }).start();
-
-            }
-        });
 
     }
+
+
 
 //    @Override
 //    public void onClick(View view){
