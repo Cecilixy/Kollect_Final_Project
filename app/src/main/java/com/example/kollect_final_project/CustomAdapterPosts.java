@@ -7,15 +7,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapterPosts extends BaseAdapter {
     private Context context;
     private ArrayList<Post> posts;
 
-    public CustomAdapter(Context context, ArrayList<Post> posts) {
+    public CustomAdapterPosts(Context context, ArrayList<Post> posts) {
 
         this.context = context;
         this.posts = posts;
@@ -44,7 +42,7 @@ public class CustomAdapter extends BaseAdapter {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.data_item, null, true);
+            convertView = inflater.inflate(R.layout.data_item_posts, null, true);
 
             holder.tvSellername = (TextView) convertView.findViewById(R.id.seller_name);
             holder.tvArtistname = (TextView) convertView.findViewById(R.id.artist_name);

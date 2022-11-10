@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
         private ListView listView;
         private ArrayList<Post> userModelArrayList;
-        private CustomAdapter customAdapter;
+        private CustomAdapterPosts customAdapterPosts;
         private MySQLiteOpenHelper databaseHelper;
 
         @Override
@@ -27,8 +27,8 @@ import java.util.ArrayList;
 
             userModelArrayList = databaseHelper.getAllPosts();
 
-            customAdapter = new CustomAdapter(this,userModelArrayList);
-            listView.setAdapter(customAdapter);
+            customAdapterPosts = new CustomAdapterPosts(this,userModelArrayList);
+            listView.setAdapter(customAdapterPosts);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

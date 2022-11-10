@@ -214,7 +214,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<User> getAllArtists( ) {
+    public ArrayList<User> getAllUsers( ) {
         String sqlQuery = "select * from " + TABLE_NAME_USER;
 
         SQLiteDatabase db = this.getWritableDatabase( );

@@ -46,7 +46,7 @@ public class AddUser extends AppCompatActivity {
         btnGetall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddUser.this, getAllPosts.class);
+                Intent intent = new Intent(AddUser.this, getAllUsers.class);
                 startActivity(intent);
             }
         });
