@@ -29,6 +29,9 @@ public class AddUser extends AppCompatActivity {
         etInstagramID = (EditText) findViewById(R.id.etInstagramID);
         etPassword = (EditText) findViewById(R.id.etPassword);
 
+        // add default user
+
+        dbManager.insertUser("admin","123","Male","www.instagram.com");
 
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,6 +30,8 @@ public class AddPost extends AppCompatActivity {
         etgroups = (EditText) findViewById(R.id.etgroup);
         etprice = (EditText) findViewById(R.id.etprice);
 
+        // add default post
+        dbManager.insertPost("admin","Jenny","Blackpink",100,1);
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
