@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         myFirebasedata = FirebaseDatabase.getInstance();
 
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

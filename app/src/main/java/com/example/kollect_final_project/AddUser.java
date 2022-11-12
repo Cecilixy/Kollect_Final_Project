@@ -3,6 +3,8 @@ package com.example.kollect_final_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +42,7 @@ public class AddUser extends AppCompatActivity {
 
         // add default user
 
-        dbManager.insertUser("admin","123","Male","www.instagram.com");
+        // dbManager.insertUser("admin","123","Male","www.instagram.com");
 
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +55,7 @@ public class AddUser extends AppCompatActivity {
                 etGender.setText("");
                 etInstagramID.setText("");
                 Toast.makeText(AddUser.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
+                dbManager.printAutoIncrements();
             }
         });
 
@@ -69,4 +72,7 @@ public class AddUser extends AppCompatActivity {
         Intent i = new Intent(AddUser.this, MainActivity.class);
         startActivity(i);
     }
+
+
+
 }

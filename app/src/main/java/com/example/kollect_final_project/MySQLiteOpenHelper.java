@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("price",price);
         values.put("status",status);
         db.insert(TABLE_NAME_POSTS,null,values);
+
     }
     //根据学号删除信息 防止有重名的同学
     public void deletePostFromDbByNumber(int number){
@@ -235,6 +237,45 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         }
         db.close( );
         return users;
+    }
+
+//    public long getNextId(String tableName) {
+//        SQLiteDatabase db=getWritableDatabase();
+//        Cursor c = null;
+//        long seq = 0;
+//        try {
+//            String sql = "select seq from sqlite_sequence where name=?";
+//            c = db.rawQuery(sql, new String[] {tableName});
+//            if (c.moveToFirst()) {
+//                seq = c.getLong(0);
+//            }
+//        } finally {
+//            if (c != null) {
+//                c.close();
+//            }
+//        }
+//        return seq + 1;
+//    }
+
+    @SuppressLint("Range")
+    public void printAutoIncrements(){
+        String query = "SELECT MAX(id) AS max_id from " + TABLE_NAME_USER;
+        SQLiteDatabase db = this.getWritableDatabase( );
+
+        Cursor cursor = db.rawQuery(query, null);
+        int id = 0;
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                id = cursor.getInt(0);
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        Log.e("MainActivity", String.valueOf(id));
+
+
     }
 
 
