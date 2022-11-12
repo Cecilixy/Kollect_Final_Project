@@ -9,17 +9,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AddUser extends AppCompatActivity {
 
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
     private EditText etUsername, etGender, etInstagramID, etPassword;
+    private FirebaseDatabase myFirebasedata;
+    private DatabaseReference userReference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
 
         dbManager = new MySQLiteOpenHelper(this);
+        myFirebasedata = FirebaseDatabase.getInstance();
+        userReference = myFirebasedata.getReference().child("users");
 
 
         btnStore = (Button) findViewById(R.id.btnstore);
@@ -37,11 +46,12 @@ public class AddUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dbManager.insertUser(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                User addedUser = new User(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                userReference.push().setValue(addedUser);
                 etUsername.setText("");
                 etPassword.setText("");
                 etGender.setText("");
                 etInstagramID.setText("");
-
                 Toast.makeText(AddUser.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
             }
         });

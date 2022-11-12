@@ -6,6 +6,9 @@ public class Post implements Serializable {
     private int id,price, status;
     private String seller_name,artist_name,artist_group;
 
+    public Post() {
+    }
+
     public void setGroups(String nGroups) {
         this.artist_group = nGroups;
     }

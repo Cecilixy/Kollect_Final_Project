@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Connection;
 
@@ -27,14 +28,14 @@ public class MainActivity extends AppCompatActivity{
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
     private EditText etsname, etgroups, etprice,etaname,etstatus;
-
+    private FirebaseDatabase myFirebasedata;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        myFirebasedata = FirebaseDatabase.getInstance();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);

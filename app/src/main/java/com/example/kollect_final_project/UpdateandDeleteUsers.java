@@ -53,7 +53,7 @@ public class UpdateandDeleteUsers extends AppCompatActivity {
         btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseHelper.deletePostFromDbByNumber(user.getId());
+                databaseHelper.deleteUserFromDbByNumber(user.getId());
                 Toast.makeText(UpdateandDeleteUsers.this, "Deleted Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateandDeleteUsers.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

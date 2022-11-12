@@ -6,6 +6,16 @@ public class User implements Serializable {
     private int id,fav_artist_id, fav_group_id, premium;
     private String user_name, password, gender, insta_id;
 
+    public User() {
+    }
+
+    public User(String user_name, String password, String gender, String insta_id) {
+        this.user_name = user_name;
+        this.password = password;
+        this.gender = gender;
+        this.insta_id = insta_id;
+    }
+
     public void setId(int newId) {
         this.id = newId;
     }
