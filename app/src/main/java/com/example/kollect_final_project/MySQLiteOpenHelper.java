@@ -7,10 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
@@ -35,7 +33,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "status integer)");
         db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
                 "id integer primary key autoincrement, " +
-                "user_name varchar(60) NOT NULL, " +
+                "username varchar(60) NOT NULL, " +
                 "password varchar(60) NOT NULL, " +
                 "fav_artist_id integer, " +
                 "fav_group_id integer, " +
@@ -160,7 +158,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public void insertUser(String user_name, String password, String gender, String instagram_id){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("user_name", user_name);
+        values.put("username", user_name);
         values.put("password", password);
         values.put("gender", gender);
         values.put("insta_id", instagram_id);
@@ -176,7 +174,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public void updateUser(int id, String user_name, String password, String gender, String instagram_id){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("user_name", user_name);
+        values.put("username", user_name);
         values.put("password", password);
         values.put("gender", gender);
         values.put("insta_id", instagram_id);
@@ -190,7 +188,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         Cursor cursor=db.query(TABLE_NAME_USER,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
         if(cursor!=null){
             while (cursor.moveToNext()){
-                int user_name=cursor.getColumnIndex("user_name");
+                int user_name=cursor.getColumnIndex("username");
                 String user_name1 = cursor.getString(user_name);
                 int password=cursor.getColumnIndex("password");
                 String password1= cursor.getString(password);
@@ -228,7 +226,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                     = new User();
             user.setId(cursor.getInt(cursor.getColumnIndex("id")));
             user.setInsta_id(cursor.getString(cursor.getColumnIndex("insta_id")));
-            user.setUser_name(cursor.getString(cursor.getColumnIndex("user_name")));
+            user.setUser_name(cursor.getString(cursor.getColumnIndex("username")));
             user.setGender(cursor.getString(cursor.getColumnIndex("gender")));
             user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
 
@@ -258,7 +256,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 //    }
 
     @SuppressLint("Range")
-    public void printAutoIncrements(){
+    public int getAutoIncrements(){
         String query = "SELECT MAX(id) AS max_id from " + TABLE_NAME_USER;
         SQLiteDatabase db = this.getWritableDatabase( );
 
@@ -273,7 +271,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
-        Log.e("MainActivity", String.valueOf(id));
+        return id;
 
 
     }

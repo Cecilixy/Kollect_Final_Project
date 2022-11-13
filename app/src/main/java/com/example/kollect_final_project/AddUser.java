@@ -30,7 +30,8 @@ public class AddUser extends AppCompatActivity {
 
         dbManager = new MySQLiteOpenHelper(this);
         myFirebasedata = FirebaseDatabase.getInstance();
-        userReference = myFirebasedata.getReference().child("users");
+        userReference = myFirebasedata.getReference("Users");
+
 
 
         btnStore = (Button) findViewById(R.id.btnstore);
@@ -47,15 +48,15 @@ public class AddUser extends AppCompatActivity {
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int id = dbManager.getAutoIncrements() + 1;
                 dbManager.insertUser(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
-                User addedUser = new User(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
-                userReference.push().setValue(addedUser);
+                User addedUser = new User(id,etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                userReference.child(etUsername.getText().toString()).setValue(addedUser);
                 etUsername.setText("");
                 etPassword.setText("");
                 etGender.setText("");
                 etInstagramID.setText("");
                 Toast.makeText(AddUser.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
-                dbManager.printAutoIncrements();
             }
         });
 

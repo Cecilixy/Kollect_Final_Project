@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private int id,fav_artist_id, fav_group_id, premium;
-    private String user_name, password, gender, insta_id;
+    private String username, password, gender, insta_id;
 
     public User() {
     }
 
-    public User(String user_name, String password, String gender, String insta_id) {
-        this.user_name = user_name;
+    public User(int userid, String user_name, String password, String gender, String insta_id) {
+        this.id = userid;
+        this.username = user_name;
         this.password = password;
         this.gender = gender;
         this.insta_id = insta_id;
@@ -20,13 +21,13 @@ public class User implements Serializable {
         this.id = newId;
     }
 
-    public void setFav_artist_id(int newId) {this.fav_artist_id = newId;}
+//    public void setFav_artist_id(int newId) {this.fav_artist_id = newId;}
+//
+//    public void setFav_group_id(int newId) {this.fav_group_id = newId;}
+//
+//    public void setPremium(int newPremium) {this.premium = newPremium;}
 
-    public void setFav_group_id(int newId) {this.fav_group_id = newId;}
-
-    public void setPremium(int newPremium) {this.premium = newPremium;}
-
-    public void setUser_name(String newUserName) {this.user_name = newUserName;}
+    public void setUser_name(String newUserName) {this.username = newUserName;}
 
     public void setPassword(String newPassword) {this.password = newPassword;}
 
@@ -34,20 +35,20 @@ public class User implements Serializable {
 
     public void setInsta_id(String newInstaID) {this.insta_id = newInstaID;}
 
-    public int getFav_artist_id() {
-        return fav_artist_id;
-    }
-
-    public int getFav_group_id() {
-        return fav_group_id;
-    }
-
-    public int getPremium() {
-        return premium;
-    }
+//    public int getFav_artist_id() {
+//        return fav_artist_id;
+//    }
+//
+//    public int getFav_group_id() {
+//        return fav_group_id;
+//    }
+//
+//    public int getPremium() {
+//        return premium;
+//    }
 
     public String getUser_name() {
-        return user_name;
+        return username;
     }
 
     public String getPassword() {
