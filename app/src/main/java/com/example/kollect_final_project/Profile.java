@@ -23,6 +23,7 @@ public class Profile extends AppCompatActivity {
     private ImageView get_pre_arr;
     private TextView blacklist_txt;
     private ImageView blacklist_arr;
+    String _USERNAME, _INSTALINK, _GENDER, _PASSWORD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +44,39 @@ public class Profile extends AppCompatActivity {
         change_info_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent change_info = new Intent(Profile.this, Change_personal_info.class);
-                startActivity(change_info);
+                Intent intent = getIntent();
+                _USERNAME = intent.getStringExtra("user_name");
+                _GENDER = intent.getStringExtra("gender");
+                _INSTALINK = intent.getStringExtra("insta_id");
+                _PASSWORD = intent.getStringExtra("password");
+
+                Intent changeIfo = new Intent(getApplicationContext(),UserProfileUpdate.class);
+                changeIfo.putExtra("user_name",_USERNAME);
+                changeIfo.putExtra("gender",_GENDER);
+                changeIfo.putExtra("insta_id",_INSTALINK);
+                changeIfo.putExtra("password",_PASSWORD);
+
+
+                startActivity(changeIfo);
             }
         });
         change_info_arr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent change_info = new Intent(Profile.this, Change_personal_info.class);
-                startActivity(change_info);
+                Intent intent = getIntent();
+                _USERNAME = intent.getStringExtra("user_name");
+                _GENDER = intent.getStringExtra("gender");
+                _INSTALINK = intent.getStringExtra("insta_id");
+                _PASSWORD = intent.getStringExtra("password");
+
+                Intent changeIfo = new Intent(getApplicationContext(),UserProfileUpdate.class);
+                changeIfo.putExtra("user_name",_USERNAME);
+                changeIfo.putExtra("gender",_GENDER);
+                changeIfo.putExtra("insta_id",_INSTALINK);
+                changeIfo.putExtra("password",_PASSWORD);
+
+
+                startActivity(changeIfo);
             }
         });
 

@@ -151,19 +151,20 @@ public class Login extends AppCompatActivity {
 
                         username.setErrorEnabled(false);
 
-//                        String usernameFromDb = snapshot.child(userEnteredUsername).child("user_name").getValue(String.class);
-//                        String genderFromDb = snapshot.child(userEnteredUsername).child("gender").getValue(String.class);
-//                        String instaidFromDb = snapshot.child(userEnteredUsername).child("insta_id").getValue(String.class);
-//
-//                        Intent intent = new Intent(getApplicationContext(),Profile.class);
-//                        intent.putExtra("user_name",usernameFromDb);
-//                        intent.putExtra("gender",genderFromDb);
-//                        intent.putExtra("insta_id",instaidFromDb);
-//
-//                        startActivity(intent);
+                        String usernameFromDb = dataSnapshot.child(userEnteredUsername).child("user_name").getValue(String.class);
+                        String genderFromDb = dataSnapshot.child(userEnteredUsername).child("gender").getValue(String.class);
+                        String instaidFromDb = dataSnapshot.child(userEnteredUsername).child("insta_id").getValue(String.class);
 
-                        Intent i = new Intent(Login.this, MainActivity.class);
-                        startActivity(i);
+                        Intent intent = new Intent(getApplicationContext(),Profile.class);
+                        intent.putExtra("user_name",usernameFromDb);
+                        intent.putExtra("gender",genderFromDb);
+                        intent.putExtra("insta_id",instaidFromDb);
+                        intent.putExtra("password",passwordFromDB);
+
+                        startActivity(intent);
+
+//                        Intent i = new Intent(Login.this, MainActivity.class);
+//                        startActivity(i);
 
                     }
                     else{
