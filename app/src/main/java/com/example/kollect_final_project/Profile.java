@@ -34,11 +34,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        Intent intent = getIntent();
-        _USERNAME = intent.getStringExtra("user_name");
-        _GENDER = intent.getStringExtra("gender");
-        _INSTALINK = intent.getStringExtra("insta_id");
-        _PASSWORD = intent.getStringExtra("password");
+
         change_info_txt = (TextView)findViewById(R.id.change_info_txt);
         change_info_arr = (ImageView)findViewById(R.id.change_info_arr);
         username = (TextView) findViewById(R.id.username);
@@ -50,6 +46,7 @@ public class Profile extends AppCompatActivity {
         get_pre_arr = (ImageView)findViewById(R.id.get_pre_arr);
         blacklist_txt = (TextView)findViewById(R.id.blacklist_txt);
         blacklist_arr = (ImageView)findViewById(R.id.blacklist_arr);
+        Intent intent = getIntent();
         _USERNAME = intent.getStringExtra("user_name");
         _GENDER = intent.getStringExtra("gender");
         _INSTALINK = intent.getStringExtra("insta_id");
