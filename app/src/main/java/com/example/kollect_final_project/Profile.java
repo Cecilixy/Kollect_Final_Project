@@ -33,7 +33,11 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        Intent intent = getIntent();
+        _USERNAME = intent.getStringExtra("user_name");
+        _GENDER = intent.getStringExtra("gender");
+        _INSTALINK = intent.getStringExtra("insta_id");
+        _PASSWORD = intent.getStringExtra("password");
         change_info_txt = (TextView)findViewById(R.id.change_info_txt);
         change_info_arr = (ImageView)findViewById(R.id.change_info_arr);
         completed_purchase_txt = (TextView)findViewById(R.id.completed_purchase_txt);
@@ -59,8 +63,6 @@ public class Profile extends AppCompatActivity {
                 changeIfo.putExtra("gender",_GENDER);
                 changeIfo.putExtra("insta_id",_INSTALINK);
                 changeIfo.putExtra("password",_PASSWORD);
-
-
                 startActivity(changeIfo);
             }
         });
@@ -97,7 +99,7 @@ public class Profile extends AppCompatActivity {
                     startActivity(likeIng);
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://instagram.com/"+_INSTALINK)));
+                            Uri.parse("http://instagram.com/_u/"+_INSTALINK)));
                 }
             }
         });
