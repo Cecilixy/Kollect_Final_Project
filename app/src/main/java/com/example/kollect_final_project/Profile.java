@@ -3,10 +3,13 @@ package com.example.kollect_final_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +27,7 @@ public class Profile extends AppCompatActivity {
     private ImageView get_pre_arr;
     private TextView blacklist_txt;
     private ImageView blacklist_arr;
+    private Button instaButton;
     String _USERNAME, _INSTALINK, _GENDER, _PASSWORD;
 
     @Override
@@ -83,7 +87,23 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        instaButton = findViewById(R.id.instagram_btn);
+        instaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("http://instagram.com/_u/"+_INSTALINK);
+                Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
 
+                likeIng.setPackage("com.instagram.android");
+
+                try {
+                    startActivity(likeIng);
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://instagram.com/"+_INSTALINK)));
+                }
+            }
+        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.profile);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
