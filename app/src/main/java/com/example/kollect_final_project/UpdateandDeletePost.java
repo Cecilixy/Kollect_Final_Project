@@ -1,5 +1,7 @@
 package com.example.kollect_final_project;
 
+import static com.example.kollect_final_project.Login.USERID;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -43,7 +45,7 @@ public class UpdateandDeletePost extends AppCompatActivity {
         btnupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseHelper.updatePost(post.getId(),etsname.getText().toString(),etaname.getText().toString(),etgroups.getText().toString(),Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()));
+                databaseHelper.updatePost(post.getId(),etsname.getText().toString(),etaname.getText().toString(),etgroups.getText().toString(),Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()),USERID);
                 Toast.makeText(UpdateandDeletePost.this, "Updated Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateandDeletePost.this,MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

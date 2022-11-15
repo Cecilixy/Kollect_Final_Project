@@ -3,7 +3,7 @@ package com.example.kollect_final_project;
 import java.io.Serializable;
 
 public class Post implements Serializable {
-    private int id,price, status;
+    private int id,price, status, userID;
     private String seller_name,artist_name,artist_group;
 
     public Post() {
@@ -25,6 +25,9 @@ public class Post implements Serializable {
         this.artist_name = newname;
     }
 
+    public void setUserID(int newuserID){
+        this.userID = newuserID;
+    }
 
     public void setId(int newId) {
         this.id = newId;
@@ -37,6 +40,10 @@ public class Post implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public String getSellerName() {
