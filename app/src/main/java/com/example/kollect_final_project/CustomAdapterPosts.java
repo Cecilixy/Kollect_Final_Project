@@ -50,6 +50,7 @@ public class CustomAdapterPosts extends BaseAdapter {
             holder.tvprice= (TextView) convertView.findViewById(R.id.price);
 
             holder.tvstatus = (TextView) convertView.findViewById(R.id.status);
+            holder.tvUserID = (TextView) convertView.findViewById(R.id.userID);
 
 
             convertView.setTag(holder);
@@ -63,12 +64,13 @@ public class CustomAdapterPosts extends BaseAdapter {
         holder.tvgroups.setText("Artist Groups: "+ posts.get(position).getGroups());
         holder.tvprice.setText("Price: "+ posts.get(position).getPrice());
         holder.tvstatus.setText("Status: "+ posts.get(position).getStatus());
+        holder.tvUserID.setText("User_ID: " + posts.get(position).getUserID());
 
         return convertView;
     }
 
     private class ViewHolder {
 
-        protected TextView tvSellername, tvArtistname,tvgroups, tvprice, tvstatus;
+        protected TextView tvSellername, tvArtistname,tvgroups, tvprice, tvstatus, tvUserID;
     }
 }

@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Profile extends AppCompatActivity {
     private TextView change_info_txt;
     private ImageView change_info_arr;
+    private TextView username;
     private TextView completed_purchase_txt;
     private ImageView completed_purchase_arr;
     private TextView pre_txt;
@@ -40,6 +41,7 @@ public class Profile extends AppCompatActivity {
         _PASSWORD = intent.getStringExtra("password");
         change_info_txt = (TextView)findViewById(R.id.change_info_txt);
         change_info_arr = (ImageView)findViewById(R.id.change_info_arr);
+        username = (TextView) findViewById(R.id.username);
         completed_purchase_txt = (TextView)findViewById(R.id.completed_purchase_txt);
         completed_purchase_arr = (ImageView)findViewById(R.id.completed_purchase_arr);
         pre_txt = (TextView)findViewById(R.id.pre_txt);
@@ -49,14 +51,18 @@ public class Profile extends AppCompatActivity {
         blacklist_txt = (TextView)findViewById(R.id.blacklist_txt);
         blacklist_arr = (ImageView)findViewById(R.id.blacklist_arr);
 
+        Intent intent = getIntent();
+
+        _USERNAME = intent.getStringExtra("user_name");
+        _GENDER = intent.getStringExtra("gender");
+        _INSTALINK = intent.getStringExtra("insta_id");
+        _PASSWORD = intent.getStringExtra("password");
+        username.setText(_USERNAME);
+
         change_info_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
-                _USERNAME = intent.getStringExtra("user_name");
-                _GENDER = intent.getStringExtra("gender");
-                _INSTALINK = intent.getStringExtra("insta_id");
-                _PASSWORD = intent.getStringExtra("password");
+
 
                 Intent changeIfo = new Intent(getApplicationContext(),UserProfileUpdate.class);
                 changeIfo.putExtra("user_name",_USERNAME);
@@ -69,11 +75,8 @@ public class Profile extends AppCompatActivity {
         change_info_arr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
-                _USERNAME = intent.getStringExtra("user_name");
-                _GENDER = intent.getStringExtra("gender");
-                _INSTALINK = intent.getStringExtra("insta_id");
-                _PASSWORD = intent.getStringExtra("password");
+
+
 
                 Intent changeIfo = new Intent(getApplicationContext(),UserProfileUpdate.class);
                 changeIfo.putExtra("user_name",_USERNAME);

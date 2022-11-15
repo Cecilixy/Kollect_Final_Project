@@ -50,7 +50,7 @@ public class AddUser extends AppCompatActivity {
             public void onClick(View v) {
                 int id = dbManager.getAutoIncrements() + 1;
                 dbManager.insertUser(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
-                User addedUser = new User(id,etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                User addedUser = new User((id),etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
                 userReference.child(etUsername.getText().toString()).setValue(addedUser);
                 etUsername.setText("");
                 etPassword.setText("");

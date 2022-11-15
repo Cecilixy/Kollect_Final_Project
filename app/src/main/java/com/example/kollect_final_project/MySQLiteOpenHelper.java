@@ -30,7 +30,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "artist_name text, " +
                 "artist_group text, " +
                 "price integer, " +
-                "status integer)");
+                "status integer, " +
+                "user_id integer)");
+
         db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
                 "id integer primary key autoincrement, " +
                 "username varchar(60) NOT NULL, " +
@@ -55,7 +57,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertPost(String sname,String aname, String agroup, int price, int status){
+    public void insertPost(String sname,String aname, String agroup, int price, int status, int userID){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("seller_name",sname);
@@ -63,6 +65,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("artist_group",agroup);
         values.put("price",price);
         values.put("status",status);
+        values.put("user_id", userID);
         db.insert(TABLE_NAME_POSTS,null,values);
 
     }
@@ -73,7 +76,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME_POSTS, KEY_ID + " = ?",new String[]{String.valueOf(number)});
     }
     //修改数据
-    public void updatePost(int id,String sname,String aname, String agroup, int price, int status){
+    public void updatePost(int id,String sname,String aname, String agroup, int price, int status, int userID){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("seller_name",sname);
@@ -81,6 +84,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("artist_group",agroup);
         values.put("price",price);
         values.put("status",status);
+        values.put("user_id",userID);
         //依旧是根据学号改
         db.update(TABLE_NAME_POSTS, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
     }
@@ -101,6 +105,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 int price= cursor.getInt(price1);
                 int status1=cursor.getColumnIndex("status");
                 int status= cursor.getInt(status1);
+                int userID1=cursor.getColumnIndex("user_id");
+                int userID= cursor.getInt(userID1);
 
 
                 Post post =new Post();
@@ -109,6 +115,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 post.setStatus(status);
                 post.setGroups(agroup);
                 post.setPrice(price);
+                post.setUserID(userID);
 
 
                 postList.add(post);
@@ -135,6 +142,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             post.setGroups(cursor.getString(cursor.getColumnIndex("artist_group")));
             post.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
             post.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+            post.setUserID(cursor.getInt(cursor.getColumnIndex("user_id")));
 
             posts.add(post);
         }

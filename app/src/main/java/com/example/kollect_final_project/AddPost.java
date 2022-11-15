@@ -1,5 +1,7 @@
 package com.example.kollect_final_project;
 
+import static com.example.kollect_final_project.Login.USERID;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -35,7 +37,7 @@ public class AddPost extends AppCompatActivity {
         btnStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dbManager.insertPost(etsname.getText().toString(), etaname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()));
+                dbManager.insertPost(etsname.getText().toString(), etaname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()),USERID);
                 etsname.setText("");
                 etaname.setText("");
                 etstatus.setText("");
