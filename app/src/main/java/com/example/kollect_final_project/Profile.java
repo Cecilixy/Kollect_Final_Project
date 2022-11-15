@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -91,6 +92,7 @@ public class Profile extends AppCompatActivity {
         instaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.w("MainActivity",_INSTALINK);
                 Uri uri = Uri.parse("http://instagram.com/_u/"+_INSTALINK);
                 Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
 

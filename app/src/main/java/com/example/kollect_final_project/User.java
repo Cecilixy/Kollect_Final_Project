@@ -3,14 +3,14 @@ package com.example.kollect_final_project;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private int id,fav_artist_id, fav_group_id, premium;
+    private int id ,fav_artist_id, fav_group_id, premium;
     private String username, password, gender, insta_id;
+
 
     public User() {
     }
 
-    public User(int userid, String user_name, String password, String gender, String insta_id) {
-        this.id = userid;
+    public User(String user_name, String password, String gender, String insta_id) {
         this.username = user_name;
         this.password = password;
         this.gender = gender;

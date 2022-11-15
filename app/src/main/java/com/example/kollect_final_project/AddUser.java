@@ -1,5 +1,6 @@
 package com.example.kollect_final_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,8 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class AddUser extends AppCompatActivity {
 
@@ -21,6 +25,7 @@ public class AddUser extends AppCompatActivity {
     private EditText etUsername, etGender, etInstagramID, etPassword;
     private FirebaseDatabase myFirebasedata;
     private DatabaseReference userReference;
+    long maxid = 0;
 
 
     @Override
@@ -29,9 +34,20 @@ public class AddUser extends AppCompatActivity {
         setContentView(R.layout.activity_add_user);
 
         dbManager = new MySQLiteOpenHelper(this);
-        myFirebasedata = FirebaseDatabase.getInstance();
-        userReference = myFirebasedata.getReference("Users");
+        userReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        userReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    maxid = (snapshot.getChildrenCount());
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
         btnStore = (Button) findViewById(R.id.btnstore);
@@ -50,7 +66,8 @@ public class AddUser extends AppCompatActivity {
             public void onClick(View v) {
                 int id = dbManager.getAutoIncrements() + 1;
                 dbManager.insertUser(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
-                User addedUser = new User((id),etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                User addedUser = new User(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                addedUser.setId((int)(maxid + 1));
                 userReference.child(etUsername.getText().toString()).setValue(addedUser);
                 etUsername.setText("");
                 etPassword.setText("");

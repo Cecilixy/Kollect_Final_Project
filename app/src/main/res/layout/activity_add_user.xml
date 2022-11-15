@@ -95,7 +95,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="487dp"
-        android:onClick="newPostActivity"
+        android:onClick="newActivity"
         android:text="Back to Home" />
 
 </RelativeLayout>

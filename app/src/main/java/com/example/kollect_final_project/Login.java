@@ -156,7 +156,7 @@ public class Login extends AppCompatActivity {
                         String usernameFromDb = dataSnapshot.child(userEnteredUsername).child("user_name").getValue(String.class);
                         String genderFromDb = dataSnapshot.child(userEnteredUsername).child("gender").getValue(String.class);
                         String instaidFromDb = dataSnapshot.child(userEnteredUsername).child("insta_id").getValue(String.class);
-                        USERID = (dataSnapshot.child(userEnteredUsername).child("id").getValue(Integer.class));
+                        USERID = dataSnapshot.child(userEnteredUsername).child("id").getValue(Integer.class);
 
                         Intent intent = new Intent(getApplicationContext(),Profile.class);
                         intent.putExtra("user_name",usernameFromDb);
