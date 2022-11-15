@@ -47,15 +47,12 @@ public class Profile extends AppCompatActivity {
         get_pre_arr = (ImageView)findViewById(R.id.get_pre_arr);
         blacklist_txt = (TextView)findViewById(R.id.blacklist_txt);
         blacklist_arr = (ImageView)findViewById(R.id.blacklist_arr);
-
         Intent intent = getIntent();
-
         _USERNAME = intent.getStringExtra("user_name");
         _GENDER = intent.getStringExtra("gender");
         _INSTALINK = intent.getStringExtra("insta_id");
         _PASSWORD = intent.getStringExtra("password");
         username.setText(_USERNAME);
-
         change_info_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,8 +63,6 @@ public class Profile extends AppCompatActivity {
                 changeIfo.putExtra("gender",_GENDER);
                 changeIfo.putExtra("insta_id",_INSTALINK);
                 changeIfo.putExtra("password",_PASSWORD);
-
-
                 startActivity(changeIfo);
             }
         });
@@ -102,7 +97,7 @@ public class Profile extends AppCompatActivity {
                     startActivity(likeIng);
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://instagram.com/"+_INSTALINK)));
+                            Uri.parse("http://instagram.com/_u/"+_INSTALINK)));
                 }
             }
         });
