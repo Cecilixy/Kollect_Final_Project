@@ -31,7 +31,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "artist_group text, " +
                 "price integer, " +
                 "status integer, " +
-                "user_id integer)");
+                "user_id integer, " +
+                "post_images blob)");
 
         db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
                 "id integer primary key autoincrement, " +
@@ -57,7 +58,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertPost(String sname,String aname, String agroup, int price, int status, int userID){
+    public void insertPost(String sname,String aname, String agroup, int price, int status, int userID, byte[] images){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("seller_name",sname);
@@ -66,6 +67,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("price",price);
         values.put("status",status);
         values.put("user_id", userID);
+        values.put("post_images", images);
         db.insert(TABLE_NAME_POSTS,null,values);
 
     }
@@ -107,6 +109,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 int status= cursor.getInt(status1);
                 int userID1=cursor.getColumnIndex("user_id");
                 int userID= cursor.getInt(userID1);
+                int images1 = cursor.getColumnIndex("post_images");
+                byte[] images = cursor.getBlob(images1);
 
 
                 Post post =new Post();
@@ -116,6 +120,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 post.setGroups(agroup);
                 post.setPrice(price);
                 post.setUserID(userID);
+                post.setImages(images);
 
 
                 postList.add(post);

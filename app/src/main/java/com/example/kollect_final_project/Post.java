@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Post implements Serializable {
     private int id,price, status, userID;
     private String seller_name,artist_name,artist_group;
+    private byte[] images;
 
     public Post() {
     }
@@ -16,6 +17,8 @@ public class Post implements Serializable {
     public void setPrice(int newPrice) {
         this.price = newPrice;
     }
+
+    public void setImages(byte[] newimages){this.images = newimages;}
 
     public void setSellerName(String newname) {
         this.seller_name = newname;
@@ -35,6 +38,10 @@ public class Post implements Serializable {
 
     public void setStatus(int nstatus) {
         this.status = nstatus;
+    }
+
+    public byte[] getImages(){
+        return images;
     }
 
 

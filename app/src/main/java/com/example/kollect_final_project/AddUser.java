@@ -74,6 +74,8 @@ public class AddUser extends AppCompatActivity {
                 etGender.setText("");
                 etInstagramID.setText("");
                 Toast.makeText(AddUser.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AddUser.this, Login.class);
+                startActivity(intent);
             }
         });
 
