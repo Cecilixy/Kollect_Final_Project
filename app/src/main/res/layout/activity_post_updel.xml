@@ -3,21 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
+    android:background="#CCFF90"
     android:orientation="vertical"
-    tools:context="com.example.kollect_final_project.UpdateandDelete">
+    tools:context="com.example.kollect_final_project.UpdateandDeletePost">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="Name"
-        android:textColor="#F00F"
+        android:text="Seller Name"
+        android:textColor="#8C9EFF"
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/etname"
+        android:id="@+id/etsname"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
@@ -31,8 +31,27 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="Groups"
-        android:textColor="#F00F"
+        android:text="Artist Name"
+        android:textColor="#8C9EFF"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/etaname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#fff"
+        android:hint="Enter Name" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Artist Groups"
+        android:textColor="#8C9EFF"
         android:textSize="20sp" />
 
     <EditText
@@ -51,11 +70,12 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:text="Price"
-        android:textColor="#F00F"
+        android:textColor="#8C9EFF"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/etprice"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
@@ -63,6 +83,28 @@
         android:layout_marginRight="10dp"
         android:background="#fff"
         android:hint="Enter Price" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Price"
+        android:textColor="#8C9EFF"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/etstatus"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#fff"
+        android:hint="Enter Satus" />
+
+
 
     <Button
         android:id="@+id/btnupdate"

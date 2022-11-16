@@ -9,15 +9,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME="KollectData.db";//数据库名字
-    private static final String TABLE_NAME_ARTIST="Artist";//表的名字
+    private static final String TABLE_NAME_POSTS="Post";//表的名字
+    private static final String TABLE_NAME_USER="User";//表的名字
     private static final String KEY_ID = "id";
-    //创建表
-    private static final String CREATE_TABLE_SQL="create table "+TABLE_NAME_ARTIST +"(id integer primary key autoincrement,name text,groups text,price integer )";
 
     public MySQLiteOpenHelper(Context context){
         super(context,DB_NAME,null,1);
@@ -26,168 +24,197 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {  //onCreate是创建数据库方法
         Log.e("DBOpenHelper", "DBOpenHelperDBOpenHelperDBOpenHelperDBOpenHelper");
-        db.execSQL("CREATE TABLE IF NOT EXISTS Artist (id integer primary key autoincrement, name text,groups text,price integer)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS application (id integer primary key autoincrement, s varchar(60), tt varchar(60),st varchar(60),tc1 varchar(60), tc2 varchar(60), ru varchar(60),tn varchar(60),m varchar(60))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Post (" +
+                "id integer primary key autoincrement, " +
+                "seller_name text, " +
+                "artist_name text, " +
+                "artist_group text, " +
+                "price integer, " +
+                "status integer, " +
+                "user_id integer)");
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS User (" +
+                "id integer primary key autoincrement, " +
+                "username varchar(60) NOT NULL, " +
+                "password varchar(60) NOT NULL, " +
+                "fav_artist_id integer, " +
+                "fav_group_id integer, " +
+                "gender varchar(6), " +
+                "premium integer DEFAULT 0, " +
+                "insta_id varchar(60))");
         db.execSQL("CREATE TABLE IF NOT EXISTS install (id integer primary key autoincrement, na varchar(60), it varchar(60),d varchar(60))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS smslist (id integer primary key autoincrement, t varchar(60), st varchar(60),n1 varchar(60),n2 varchar(60),n varchar(60),m varchar(60),a varchar(60))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Blacklist (id integer primary key autoincrement, t varchar(60), st varchar(60),n1 varchar(60),n2 varchar(60),n varchar(60),m varchar(60),a varchar(60))");
     }
 
     //这个方法是数据库升级的时候使用到的，因为我没有用到，所以就没有写
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.e("DBOpenHelper", "onUpgradeonUpgradeonUpgradeonUpgrade");
-        db.execSQL("DROP TABLE IF EXISTS Artist");
-        db.execSQL("DROP TABLE IF EXISTS application");
+        db.execSQL("DROP TABLE IF EXISTS Post");
+        db.execSQL("DROP TABLE IF EXISTS User");
         db.execSQL("DROP TABLE IF EXISTS install");
         db.execSQL("DROP TABLE IF EXISTS smslist");
         onCreate(db);
     }
 
-//    public void addArtist(String name, String groups, int price) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        //adding user name in users table
-//        ContentValues values = new ContentValues();
-//        values.put("name", name);
-//        // db.insert(TABLE_USER, null, values);
-//        long id = db.insertWithOnConflict(TABLE_NAME_ARTIST, null, values, SQLiteDatabase.CONFLICT_IGNORE);
-//
-//        //adding user hobby in users_hobby table
-//        ContentValues valuesHobby = new ContentValues();
-//        valuesHobby.put("id", id);
-//        valuesHobby.put("groups", groups);
-//        db.insert(TABLE_NAME_ARTIST, null, valuesHobby);
-//
-//        //adding user city in users_city table
-//        ContentValues valuesCity = new ContentValues();
-//        valuesCity.put("id", id);
-//        valuesCity.put("price", price);
-//        db.insert(TABLE_NAME_ARTIST, null, valuesCity);
-//    }
-//    @SuppressLint("Range")
-//    public ArrayList<Artist> getAllArtists() {
-//        ArrayList<Artist> userModelArrayList = new ArrayList<Artist>();
-//
-//        String selectQuery = "SELECT  * FROM " + TABLE_NAME_ARTIST;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor c = db.rawQuery(selectQuery, null);
-//        // looping through all rows and adding to list
-//        if (c.moveToFirst()) {
-//            do {
-//                Artist userModel = new Artist();
-//                userModel.setId(c.getInt(c.getColumnIndex("id")));
-//                userModel.setName(c.getString(c.getColumnIndex("name")));
-//
-//                //getting user hobby where id = id from user_hobby table
-//                String selectHobbyQuery = "SELECT  * FROM " + TABLE_NAME_ARTIST + " WHERE " + "id" + " = " + userModel.getId();
-//                Log.d("oppp", selectHobbyQuery);
-//                //SQLiteDatabase dbhobby = this.getReadableDatabase();
-//                Cursor cgroups = db.rawQuery(selectHobbyQuery, null);
-//
-//                if (cgroups.moveToFirst()) {
-//                    do {
-//                        userModel.setGroups(cgroups.getString(cgroups.getColumnIndex("groups")));
-//                    } while (cgroups.moveToNext());
-//                }
-//
-//                //getting user city where id = id from user_city table
-//                String selectCityQuery = "SELECT  * FROM " + TABLE_NAME_ARTIST + " WHERE " + "id" + " = " + userModel.getId();
-//                ;
-//                //SQLiteDatabase dbCity = this.getReadableDatabase();
-//                Cursor cCity = db.rawQuery(selectCityQuery, null);
-//
-//                if (cCity.moveToFirst()) {
-//                    do {
-//                        userModel.setPrice(cCity.getInt(cCity.getColumnIndex("price")));
-//                    } while (cCity.moveToNext());
-//                }
-//
-//                // adding to Students list
-//                userModelArrayList.add(userModel);
-//            } while (c.moveToNext());
-//        }
-//        return userModelArrayList;
-//    }
-//    public void updateUser(int id, String name, String hobby, String city) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        // updating name in users table
-//        ContentValues values = new ContentValues();
-//        values.put("name", name);
-//        db.update(TABLE_NAME_ARTIST, values, "id" + " = ?", new String[]{String.valueOf(id)});
-//
-//        // updating hobby in users_hobby table
-//        ContentValues valuesHobby = new ContentValues();
-//        valuesHobby.put("groups", hobby);
-//        db.update(TABLE_NAME_ARTIST, valuesHobby, "id" + " = ?", new String[]{String.valueOf(id)});
-//
-//        // updating city in users_city table
-//        ContentValues valuesCity = new ContentValues();
-//        valuesCity.put("price", city);
-//        db.update(TABLE_NAME_ARTIST, valuesCity, "id" + " = ?", new String[]{String.valueOf(id)});
-//    }
-//    public void deleteUSer(int id) {
-//
-//        // delete row in students table based on id
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        //deleting from users table
-//        db.delete(TABLE_USER, KEY_ID + " = ?",new String[]{String.valueOf(id)});
-//
-//        //deleting from users_hobby table
-//        db.delete(TABLE_USER_HOBBY, KEY_ID + " = ?", new String[]{String.valueOf(id)});
-//
-//        //deleting from users_city table
-//        db.delete(TABLE_USER_CITY, KEY_ID + " = ?",new String[]{String.valueOf(id)});
-//    }
-//
-
-    //添加数据
-    public void insertArtist(String name,String groups,int price){
+    public void insertPost(String sname,String aname, String agroup, int price, int status, int userID){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name",name);
-        values.put("groups",groups);
+        values.put("seller_name",sname);
+        values.put("artist_name",aname);
+        values.put("artist_group",agroup);
         values.put("price",price);
-        db.insert(TABLE_NAME_ARTIST,null,values);
+        values.put("status",status);
+        values.put("user_id", userID);
+        db.insert(TABLE_NAME_POSTS,null,values);
+
     }
     //根据学号删除信息 防止有重名的同学
-    public void deleteArtistFromDbByNumber(int number){
+    public void deletePostFromDbByNumber(int number){
         SQLiteDatabase db=getWritableDatabase();
         //返回的是删除的条数
-        db.delete(TABLE_NAME_ARTIST, KEY_ID + " = ?",new String[]{String.valueOf(number)});
+        db.delete(TABLE_NAME_POSTS, KEY_ID + " = ?",new String[]{String.valueOf(number)});
     }
     //修改数据
-    public void updateArtist(int id,String name,String groups,int price){
+    public void updatePost(int id,String sname,String aname, String agroup, int price, int status, int userID){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name",name);
-        values.put("groups",groups);
+        values.put("seller_name",sname);
+        values.put("artist_name",aname);
+        values.put("artist_group",agroup);
         values.put("price",price);
+        values.put("status",status);
+        values.put("user_id",userID);
         //依旧是根据学号改
-        db.update(TABLE_NAME_ARTIST, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        db.update(TABLE_NAME_POSTS, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
     }
     //查询数据
-    public ArrayList<Artist> selectArtist(int number){
+    public ArrayList<Post> selectPost(int number){
         SQLiteDatabase db=getWritableDatabase();
-        ArrayList<Artist> artistList=new ArrayList<>();
-        Cursor cursor=db.query(TABLE_NAME_ARTIST,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
+        ArrayList<Post> postList =new ArrayList<>();
+        Cursor cursor=db.query(TABLE_NAME_POSTS,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
         if(cursor!=null){
             while (cursor.moveToNext()){
-                int name1=cursor.getColumnIndex("name");
-                String name= cursor.getString(name1);
-                int groups1=cursor.getColumnIndex("groups");
-                String groups= cursor.getString(groups1);
+                int sname1=cursor.getColumnIndex("seller_name");
+                String sname= cursor.getString(sname1);
+                int aname1=cursor.getColumnIndex("artist_name");
+                String aname= cursor.getString(aname1);
+                int agroup1=cursor.getColumnIndex("artist_group");
+                String agroup= cursor.getString(agroup1);
                 int price1=cursor.getColumnIndex("price");
                 int price= cursor.getInt(price1);
+                int status1=cursor.getColumnIndex("status");
+                int status= cursor.getInt(status1);
+                int userID1=cursor.getColumnIndex("user_id");
+                int userID= cursor.getInt(userID1);
 
 
-                Artist artist=new Artist();
-                artist.setName(name);
-                artist.setGroups(groups);
-                artist.setPrice(price);
+                Post post =new Post();
+                post.setSellerName(sname);
+                post.setArtistname(aname);
+                post.setStatus(status);
+                post.setGroups(agroup);
+                post.setPrice(price);
+                post.setUserID(userID);
 
 
-                artistList.add(artist);
+                postList.add(post);
+            }
+            cursor.close();
+        }
+        return postList;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Post> getAllPosts( ) {
+        String sqlQuery = "select * from " + TABLE_NAME_POSTS;
+
+        SQLiteDatabase db = this.getWritableDatabase( );
+        Cursor cursor = db.rawQuery( sqlQuery, null );
+
+        ArrayList<Post> posts = new ArrayList<Post>( );
+        while( cursor.moveToNext( ) ) {
+            Post post
+                    = new Post();
+            post.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            post.setSellerName(cursor.getString(cursor.getColumnIndex("seller_name")));
+            post.setArtistname(cursor.getString(cursor.getColumnIndex("artist_name")));
+            post.setGroups(cursor.getString(cursor.getColumnIndex("artist_group")));
+            post.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
+            post.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+            post.setUserID(cursor.getInt(cursor.getColumnIndex("user_id")));
+
+            posts.add(post);
+        }
+        db.close( );
+        return posts;
+    }
+
+    /*
+
+
+        -------------------
+        USER FUNCTIONALITY
+        -------------------
+
+
+
+     */
+
+
+    //添加数据
+    public void insertUser(String user_name, String password, String gender, String instagram_id){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", user_name);
+        values.put("password", password);
+        values.put("gender", gender);
+        values.put("insta_id", instagram_id);
+        db.insert(TABLE_NAME_USER,null,values);
+    }
+    //根据学号删除信息 防止有重名的同学
+    public void deleteUserFromDbByNumber(int number){
+        SQLiteDatabase db=getWritableDatabase();
+        //返回的是删除的条数
+        db.delete(TABLE_NAME_USER, KEY_ID + " = ?",new String[]{String.valueOf(number)});
+    }
+    //修改数据
+    public void updateUser(int id, String user_name, String password, String gender, String instagram_id){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("username", user_name);
+        values.put("password", password);
+        values.put("gender", gender);
+        values.put("insta_id", instagram_id);
+        //依旧是根据学号改
+        db.update(TABLE_NAME_USER, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+    }
+    //查询数据
+    public ArrayList<User> selectUser(int number){
+        SQLiteDatabase db=getWritableDatabase();
+        ArrayList<User> artistList=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_NAME_USER,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
+        if(cursor!=null){
+            while (cursor.moveToNext()){
+                int user_name=cursor.getColumnIndex("username");
+                String user_name1 = cursor.getString(user_name);
+                int password=cursor.getColumnIndex("password");
+                String password1= cursor.getString(password);
+                int gender=cursor.getColumnIndex("gender");
+                String gender1= cursor.getString(gender);
+                int insta_id=cursor.getColumnIndex("insta_id");
+                String insta_id1= cursor.getString(insta_id);
+
+
+
+                User user=new User();
+                user.setInsta_id(insta_id1);
+                user.setUser_name(user_name1);
+                user.setGender(gender1);
+                user.setPassword(password1);
+
+
+                artistList.add(user);
             }
             cursor.close();
         }
@@ -195,24 +222,67 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    public ArrayList<Artist> getAllArtists( ) {
-        String sqlQuery = "select * from " + TABLE_NAME_ARTIST;
+    public ArrayList<User> getAllUsers( ) {
+        String sqlQuery = "select * from " + TABLE_NAME_USER;
 
         SQLiteDatabase db = this.getWritableDatabase( );
         Cursor cursor = db.rawQuery( sqlQuery, null );
 
-        ArrayList<Artist> artists = new ArrayList<Artist>( );
+        ArrayList<User> users = new ArrayList<User>( );
         while( cursor.moveToNext( ) ) {
-            Artist artist
-                    = new Artist();
-            artist.setId(cursor.getInt(cursor.getColumnIndex("id")));
-            artist.setName(cursor.getString(cursor.getColumnIndex("name")));
-            artist.setGroups(cursor.getString(cursor.getColumnIndex("groups")));
-            artist.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+            User user
+                    = new User();
+            user.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            user.setInsta_id(cursor.getString(cursor.getColumnIndex("insta_id")));
+            user.setUser_name(cursor.getString(cursor.getColumnIndex("username")));
+            user.setGender(cursor.getString(cursor.getColumnIndex("gender")));
+            user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
 
-            artists.add(artist);
+
+            users.add(user);
         }
         db.close( );
-        return artists;
+        return users;
     }
+
+//    public long getNextId(String tableName) {
+//        SQLiteDatabase db=getWritableDatabase();
+//        Cursor c = null;
+//        long seq = 0;
+//        try {
+//            String sql = "select seq from sqlite_sequence where name=?";
+//            c = db.rawQuery(sql, new String[] {tableName});
+//            if (c.moveToFirst()) {
+//                seq = c.getLong(0);
+//            }
+//        } finally {
+//            if (c != null) {
+//                c.close();
+//            }
+//        }
+//        return seq + 1;
+//    }
+
+    @SuppressLint("Range")
+    public int getAutoIncrements(){
+        String query = "SELECT MAX(id) AS max_id from " + TABLE_NAME_USER;
+        SQLiteDatabase db = this.getWritableDatabase( );
+
+        Cursor cursor = db.rawQuery(query, null);
+        int id = 0;
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                id = cursor.getInt(0);
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        return id;
+
+
+    }
+
+
 }

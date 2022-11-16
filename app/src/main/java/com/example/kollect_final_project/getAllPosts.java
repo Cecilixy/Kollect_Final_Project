@@ -7,35 +7,34 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-    public class getAllArtists extends AppCompatActivity {
+    public class getAllPosts extends AppCompatActivity {
 
         private ListView listView;
-        private ArrayList<Artist> userModelArrayList;
-        private CustomAdapter customAdapter;
+        private ArrayList<Post> userModelArrayList;
+        private CustomAdapterPosts customAdapterPosts;
         private MySQLiteOpenHelper databaseHelper;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_get_all_artists);
+            setContentView(R.layout.activity_get_all_posts);
 
             listView = (ListView) findViewById(R.id.listview);
 
             databaseHelper = new MySQLiteOpenHelper(this);
 
-            userModelArrayList = databaseHelper.getAllArtists();
+            userModelArrayList = databaseHelper.getAllPosts();
 
-            customAdapter = new CustomAdapter(this,userModelArrayList);
-            listView.setAdapter(customAdapter);
+            customAdapterPosts = new CustomAdapterPosts(this,userModelArrayList);
+            listView.setAdapter(customAdapterPosts);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(getAllArtists.this, UpdateandDelete.class);
-                    intent.putExtra("user", (Serializable) userModelArrayList.get(position));
+                    Intent intent = new Intent(getAllPosts.this, UpdateandDeletePost.class);
+                    intent.putExtra("user", userModelArrayList.get(position));
                     startActivity(intent);
                 }
             });

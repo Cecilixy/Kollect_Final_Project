@@ -7,31 +7,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
-
-import java.util.ArrayList;
-
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapterPosts extends BaseAdapter {
     private Context context;
-    private ArrayList<Artist> artists;
+    private ArrayList<Post> posts;
 
-    public CustomAdapter(Context context, ArrayList<Artist> artists) {
+    public CustomAdapterPosts(Context context, ArrayList<Post> posts) {
 
         this.context = context;
-        this.artists = artists;
+        this.posts = posts;
     }
 
     @Override
     public int getCount() {
-        return artists.size();
+        return posts.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return artists.get(i);
+        return posts.get(i);
     }
 
     @Override
@@ -47,11 +42,15 @@ public class CustomAdapter extends BaseAdapter {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.data_item, null, true);
+            convertView = inflater.inflate(R.layout.data_item_posts, null, true);
 
-            holder.tvname = (TextView) convertView.findViewById(R.id.name);
+            holder.tvSellername = (TextView) convertView.findViewById(R.id.seller_name);
+            holder.tvArtistname = (TextView) convertView.findViewById(R.id.artist_name);
             holder.tvgroups = (TextView) convertView.findViewById(R.id.groups);
             holder.tvprice= (TextView) convertView.findViewById(R.id.price);
+
+            holder.tvstatus = (TextView) convertView.findViewById(R.id.status);
+            holder.tvUserID = (TextView) convertView.findViewById(R.id.userID);
 
 
             convertView.setTag(holder);
@@ -60,15 +59,18 @@ public class CustomAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.tvname.setText("Name: "+artists.get(position).getName());
-        holder.tvgroups.setText("Groups: "+artists.get(position).getGroups());
-        holder.tvprice.setText("Price: "+artists.get(position).getPrice());
+        holder.tvSellername.setText("Seller Name: "+ posts.get(position).getSellerName());
+        holder.tvArtistname.setText("Artist Name: "+ posts.get(position).getArtistName());
+        holder.tvgroups.setText("Artist Groups: "+ posts.get(position).getGroups());
+        holder.tvprice.setText("Price: "+ posts.get(position).getPrice());
+        holder.tvstatus.setText("Status: "+ posts.get(position).getStatus());
+        holder.tvUserID.setText("User_ID: " + posts.get(position).getUserID());
 
         return convertView;
     }
 
     private class ViewHolder {
 
-        protected TextView tvname, tvgroups, tvprice;
+        protected TextView tvSellername, tvArtistname,tvgroups, tvprice, tvstatus, tvUserID;
     }
 }

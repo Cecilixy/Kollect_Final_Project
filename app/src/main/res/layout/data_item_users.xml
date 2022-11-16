@@ -8,39 +8,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000"
+        android:background="#82B1FF"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:layout_marginTop="10dp"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingLeft="10dp"
-            android:text="Name" />
+            android:text="User Name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
 
         <TextView
-            android:id="@+id/groups"
+            android:id="@+id/gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingLeft="10dp"
-            android:text="Groups" />
+            android:text="Gender"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingLeft="10dp"
-            android:text="Price" />
+            android:text="Password"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/instagram_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Instagram ID"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
+
+
 
 
     </LinearLayout>

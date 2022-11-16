@@ -2,37 +2,20 @@ package com.example.kollect_final_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Handler;
-import android.annotation.SuppressLint;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
     RequestQueue requestQueue;
@@ -44,42 +27,16 @@ public class MainActivity extends AppCompatActivity{
     TextView tx1;
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
-    private EditText etname, etgroups, etprice;
-
+    private EditText etsname, etgroups, etprice,etaname,etstatus;
+    private FirebaseDatabase myFirebasedata;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        myFirebasedata = FirebaseDatabase.getInstance();
 
-        dbManager = new MySQLiteOpenHelper(this);
-
-
-        btnStore = (Button) findViewById(R.id.btnstore);
-        btnGetall = (Button) findViewById(R.id.btnget);
-        etname = (EditText) findViewById(R.id.etname);
-        etgroups = (EditText) findViewById(R.id.etgroup);
-        etprice = (EditText) findViewById(R.id.etprice);
-
-        btnStore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dbManager.insertArtist(etname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()));
-                etname.setText("");
-                etgroups.setText("");
-                etprice.setText("");
-                Toast.makeText(MainActivity.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnGetall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, getAllArtists.class);
-                startActivity(intent);
-            }
-        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -108,6 +65,16 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    public void newPostActivity(View v){
+        Intent i = new Intent(MainActivity.this, AddPost.class);
+        startActivity(i);
+    }
+
+    public void newUserActivity(View v){
+        Intent i = new Intent(MainActivity.this, AddUser.class);
+        startActivity(i);
     }
 
 
