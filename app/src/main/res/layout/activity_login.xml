@@ -22,13 +22,13 @@
 
         android:id="@+id/logo_image"
 
-        android:layout_width="150dp"
+        android:layout_width="119dp"
 
-        android:layout_height="150dp"
+        android:layout_height="90dp"
 
-        android:transitionName="logo_image"
+        android:src="@drawable/pig"
 
-        android:src="@drawable/pig"/>
+        android:transitionName="logo_image" />
 
 
     <TextView
