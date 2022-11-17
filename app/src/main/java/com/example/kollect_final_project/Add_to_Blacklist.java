@@ -1,13 +1,16 @@
 package com.example.kollect_final_project;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +27,9 @@ public class Add_to_Blacklist extends AppCompatActivity {
     private FirebaseDatabase myFirebasedata;
     private DatabaseReference userReference;
     long maxid = 0;
+
+    private final int GALLERY_REQUEST_CODE = 1000;
+    ImageView imgGallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,16 @@ public class Add_to_Blacklist extends AppCompatActivity {
         btnSubmit = (Button) findViewById(R.id.btn_submit);
         etUsername = (EditText) findViewById(R.id.et_username);
         etPaypalID = (EditText) findViewById(R.id.et_paypalID);
+
+        imgGallery = (ImageView) findViewById(R.id.imageUpload);
+        imgGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent,GALLERY_REQUEST_CODE);
+            }
+        });
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,4 +97,16 @@ public class Add_to_Blacklist extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            if (requestCode == GALLERY_REQUEST_CODE){
+                imgGallery.setImageURI(data.getData());
+            }
+        }
+    }
+
 }
