@@ -1,334 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Favorite">
+    tools:context=".Search">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
-        app:layout_constraintBottom_toBottomOf="@+id/tableLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navigation" />
-
-
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-        <TextView
-            android:id="@+id/Fav_Group_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="405dp"
-            android:layout_weight="1"
-            android:text="My Favorite Group"
-            android:textSize="30dp" />
-
-        <Button
-            android:id="@+id/Add_Group_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add" />
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/group1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/group4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/group7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/group10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/group12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-        </TableRow>
-
-    </TableLayout>
-
-    <TableLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation">
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_marginBottom="30dp"
+>
 
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/Fav_Artist_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="128dp"
-            android:layout_weight="1"
-            android:text="My Favorite Artist"
-            android:textSize="30dp" />
+            <TextView
+                android:id="@+id/favGroupid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="FAVORITE GROUP"
+                android:visibility="visible" />
 
-        <Button
-            android:id="@+id/Add_Artist_btn"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="add a new group"
+                android:textAllCaps="false" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/groups_added"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:background="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="FAVORTIE ARTISTS" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="add a new artist"
+                android:textAllCaps="false" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/artists_added"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add" />
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/white"
+            app:itemIconTint="@drawable/selector"
+            app:itemTextColor="@drawable/selector"
+            app:menu="@menu/menu_navigation">
 
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/artist1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/artist4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/artist7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/artist10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-            <Button
-                android:id="@+id/artist12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Button" />
-
-        </TableRow>
-
-    </TableLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+>
+</RelativeLayout>
