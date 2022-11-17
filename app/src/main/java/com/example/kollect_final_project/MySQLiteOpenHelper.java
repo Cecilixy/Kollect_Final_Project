@@ -47,7 +47,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS install (id integer primary key autoincrement, na varchar(60), it varchar(60),d varchar(60))");
         db.execSQL("CREATE TABLE IF NOT EXISTS Blacklist (" +
                 "id integer primary key autoincrement, " +
-                "instagramID varchar(60), " +
+                "instagramID varchar(60) not null, " +
                 "paypalID varchar(60)," +
                 "reportNum integer default 1," +
                 "proofImg blob)");
@@ -323,15 +323,45 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME_BLACKLIST, KEY_ID + " = ?",new String[]{String.valueOf(number)});
     }
 
-    public void updateBlacklist(int id, String instagramID, String paypalID, int reportNum){
+    public void updateBlacklist(String instagramID, String paypalID, int reportNum){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("instagramID", instagramID);
         values.put("paypalID", paypalID);
         values.put("reportNum", reportNum);
 
-        db.update(TABLE_NAME_BLACKLIST, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        db.update(TABLE_NAME_BLACKLIST, values, "instagramID = ?", new String[]{String.valueOf(instagramID)});
     }
+
+    public int checkReportNum (String instagramID){
+        SQLiteDatabase db=getWritableDatabase();
+        ArrayList<Blacklist> blacklistList=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_NAME_BLACKLIST,null,"instagramID like ?",new String[] {instagramID},null,null,null);
+        int reportNum1 = 0;
+        if(cursor!=null) {
+            int iID = cursor.getColumnIndex("instagramID");
+            String iID1 = cursor.getString(iID);
+            int paypalID = cursor.getColumnIndex("paypalID");
+            String paypalID1 = cursor.getString(paypalID);
+            int reportNum = cursor.getColumnIndex("reportNum");
+            reportNum1 = cursor.getInt(reportNum);
+            
+        }
+        return reportNum1;
+
+
+    }
+
+    public boolean ifBlacklistExistsByInstagram (String instagramID){
+        SQLiteDatabase db = getReadableDatabase();
+        String queryString = "SELECT 1 FROM " + TABLE_NAME_BLACKLIST + " WHERE " + instagramID + " = ?";
+        Cursor c = db.rawQuery(queryString, new String[]{instagramID});
+        boolean result = c.getCount() > 0;
+        c.close();
+        db.close();
+        return result;
+    }
+
 
     public ArrayList<Blacklist> selectBlacklist(int number){
         SQLiteDatabase db=getWritableDatabase();
