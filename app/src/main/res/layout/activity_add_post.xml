@@ -109,4 +109,14 @@
         android:layout_marginTop="512dp"
         android:onClick="newActivity"
         android:text="Back to Home" />
+
+    <ImageView
+        android:id="@+id/imageUpload"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="423dp"
+        android:layout_marginEnd="42dp"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 </RelativeLayout>

@@ -64,7 +64,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertPost(String sname,String aname, String agroup, int price, int status, int userID){
+    public void insertPost(String sname,String aname, String agroup, int price, int status, int userID, byte[] img){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("seller_name",sname);
@@ -73,6 +73,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         values.put("price",price);
         values.put("status",status);
         values.put("user_id", userID);
+        values.put("post_images", img);
 
         db.insert(TABLE_NAME_POSTS,null,values);
 
@@ -154,6 +155,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             post.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
             post.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
             post.setUserID(cursor.getInt(cursor.getColumnIndex("user_id")));
+            post.setImages(cursor.getBlob(cursor.getColumnIndex("post_images")));
 
             posts.add(post);
         }

@@ -28,12 +28,11 @@ public class MainActivity extends AppCompatActivity{
 
     Button bt;
     TextView tx1;
-    ImageView imgGallery;
+
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
     private EditText etsname, etgroups, etprice,etaname,etstatus;
     private FirebaseDatabase myFirebasedata;
-    private final int GALLERY_REQUEST_CODE = 1000;
 
 
     @Override
@@ -42,15 +41,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         myFirebasedata = FirebaseDatabase.getInstance();
 
-        imgGallery = (ImageView) findViewById(R.id.imageUpload);
-        imgGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,GALLERY_REQUEST_CODE);
-            }
-        });
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -81,16 +72,7 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK){
-            if (requestCode == GALLERY_REQUEST_CODE){
-                imgGallery.setImageURI(data.getData());
-            }
-        }
-    }
 
     public void newPostActivity(View v){
         Intent i = new Intent(MainActivity.this, AddPost.class);
