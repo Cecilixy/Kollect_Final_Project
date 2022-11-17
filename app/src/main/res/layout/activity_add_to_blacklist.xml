@@ -38,8 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Put Username Here" />
+            android:hint="Put Username Here"
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/ins_link_tv"
@@ -55,8 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="(Optinal)" />
+            android:hint="(Optinal)"
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/textView4"

@@ -334,16 +334,17 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public int checkReportNum (String instagramID){
         SQLiteDatabase db=getWritableDatabase();
         ArrayList<Blacklist> blacklistList=new ArrayList<>();
-        Cursor cursor=db.query(TABLE_NAME_BLACKLIST,null,"instagramID like ?",new String[] {instagramID},null,null,null);
+        Cursor cursor=db.query(TABLE_NAME_BLACKLIST,null,"instagramID = ?",new String[] {instagramID},null,null,null);
         int reportNum1 = 0;
         if(cursor!=null) {
-            int iID = cursor.getColumnIndex("instagramID");
-            String iID1 = cursor.getString(iID);
-            int paypalID = cursor.getColumnIndex("paypalID");
-            String paypalID1 = cursor.getString(paypalID);
-            int reportNum = cursor.getColumnIndex("reportNum");
-            reportNum1 = cursor.getInt(reportNum);
-            
+            while (cursor.moveToNext()) {
+                int iID = cursor.getColumnIndex("instagramID");
+                String iID1 = cursor.getString(iID);
+                int paypalID = cursor.getColumnIndex("paypalID");
+                String paypalID1 = cursor.getString(paypalID);
+                int reportNum = cursor.getColumnIndex("reportNum");
+                reportNum1 = cursor.getInt(reportNum);
+            }
         }
         return reportNum1;
 
@@ -352,7 +353,8 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     public boolean ifBlacklistExistsByInstagram (String instagramID){
         SQLiteDatabase db = getReadableDatabase();
-        String queryString = "SELECT 1 FROM " + TABLE_NAME_BLACKLIST + " WHERE " + instagramID + " = ?";
+        String queryString = "SELECT 1 FROM " + TABLE_NAME_BLACKLIST + " WHERE " + "instagramID" + " = ?";
+
         Cursor c = db.rawQuery(queryString, new String[]{instagramID});
         boolean result = c.getCount() > 0;
         c.close();
@@ -401,7 +403,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             Blacklist blacklist
                     = new Blacklist();
             blacklist.setId(cursor.getInt(cursor.getColumnIndex("id")));
-            blacklist.setInstagramID(cursor.getString(cursor.getColumnIndex("InstagramID")));
+            blacklist.setInstagramID(cursor.getString(cursor.getColumnIndex("instagramID")));
             blacklist.setPaypalID(cursor.getString(cursor.getColumnIndex("paypalID")));
             blacklist.setReportNum(cursor.getInt(cursor.getColumnIndex("reportNum")));
 

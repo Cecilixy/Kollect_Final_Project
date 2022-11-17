@@ -53,23 +53,27 @@ public class Add_to_Blacklist extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 if (dbManager.ifBlacklistExistsByInstagram(etUsername.getText().toString())){
                     dbManager.updateBlacklist(etUsername.getText().toString(),
                             etPaypalID.getText().toString(), dbManager.checkReportNum(etUsername.getText().toString()) + 1);
-                } else{
+                } else {
                     int id = dbManager.getAutoIncrements() + 1;
 
                     dbManager.insertBlacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1);
                     Blacklist addedUser = new Blacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1);
-                    addedUser.setId((int)(maxid + 1));
+                    addedUser.setId((int) (maxid + 1));
                     userReference.child(etUsername.getText().toString()).setValue(addedUser);
+                }
                     etUsername.setText("");
                     etPaypalID.setText("");
 
                     Toast.makeText(Add_to_Blacklist.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Add_to_Blacklist.this, Login.class);
+                    Intent intent = new Intent(Add_to_Blacklist.this, BlacklistInterface.class);
                     startActivity(intent);
-                }
+
 
 
 
