@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -18,6 +20,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.ByteArrayOutputStream;
 
 public class Add_to_Blacklist extends AppCompatActivity {
 
@@ -69,7 +73,10 @@ public class Add_to_Blacklist extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Bitmap photo = ((BitmapDrawable)imgGallery.getDrawable()).getBitmap();
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                photo.compress(Bitmap.CompressFormat.PNG, 100, bos);
+                byte[] bArray = bos.toByteArray();
 
 
                 if (dbManager.ifBlacklistExistsByInstagram(etUsername.getText().toString())){
@@ -78,8 +85,8 @@ public class Add_to_Blacklist extends AppCompatActivity {
                 } else {
                     int id = dbManager.getAutoIncrements() + 1;
 
-                    dbManager.insertBlacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1);
-                    Blacklist addedUser = new Blacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1);
+                    dbManager.insertBlacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1, bArray);
+                    Blacklist addedUser = new Blacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1, bArray);
                     addedUser.setId((int) (maxid + 1));
                     userReference.child(etUsername.getText().toString()).setValue(addedUser);
                 }

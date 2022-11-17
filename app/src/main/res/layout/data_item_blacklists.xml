@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     android:orientation="vertical">
 
@@ -41,6 +42,13 @@
             android:text="Number of Reports"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#fff" />
+        <ImageView
+            android:id="@+id/imageUpload"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
 
 
 

@@ -308,12 +308,13 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
      */
 
 
-    public void insertBlacklist(String instagramID, String paypalID, int reportNum){
+    public void insertBlacklist(String instagramID, String paypalID, int reportNum, byte[] img){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("instagramID", instagramID);
         values.put("paypalID", paypalID);
         values.put("reportNum", reportNum);
+        values.put("proofImg", img);
 
         db.insert(TABLE_NAME_BLACKLIST,null,values);
     }
@@ -377,12 +378,15 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 String paypalID1= cursor.getString(paypalID);
                 int reportNum = cursor.getColumnIndex("reportNum");
                 int reportNum1 = cursor.getInt(reportNum);
+                int images1 = cursor.getColumnIndex("proofImg");
+                byte[] images = cursor.getBlob(images1);
 
 
                 Blacklist blacklist = new Blacklist();
                 blacklist.setInstagramID(instagramID1);
                 blacklist.setPaypalID(paypalID1);
                 blacklist.setReportNum(reportNum1);
+                blacklist.setImages(images);
 
 
 
@@ -408,6 +412,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
             blacklist.setInstagramID(cursor.getString(cursor.getColumnIndex("instagramID")));
             blacklist.setPaypalID(cursor.getString(cursor.getColumnIndex("paypalID")));
             blacklist.setReportNum(cursor.getInt(cursor.getColumnIndex("reportNum")));
+            blacklist.setImages(cursor.getBlob(cursor.getColumnIndex("proofImg")));
 
 
             blacklists.add(blacklist);

@@ -1,10 +1,13 @@
 package com.example.kollect_final_project;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -47,6 +50,7 @@ public class CustomAdapterBlacklist extends BaseAdapter {
             holder.tvInstagramID = (TextView) convertView.findViewById(R.id.user_name);
             holder.tvPaypalID = (TextView) convertView.findViewById(R.id.paypalID);
             holder.tvReportNum = (TextView) convertView.findViewById(R.id.reportNum);
+            holder.tvProofImg = (ImageView) convertView.findViewById(R.id.imageUpload);
 
 
             convertView.setTag(holder);
@@ -58,6 +62,9 @@ public class CustomAdapterBlacklist extends BaseAdapter {
         holder.tvInstagramID.setText("Instagram ID: "+ blacklists.get(position).getInstagramID());
         holder.tvPaypalID.setText("Paypal ID: "+ blacklists.get(position).getPaypalID());
         holder.tvReportNum.setText("Number of reports: "+ blacklists.get(position).getReportNum());
+        byte[] pic = (blacklists.get(position).getImages());
+        Bitmap b = BitmapFactory.decodeByteArray(pic, 0, pic.length);
+        holder.tvProofImg.setImageBitmap(b);
 
 
 
@@ -67,6 +74,7 @@ public class CustomAdapterBlacklist extends BaseAdapter {
     private class ViewHolder {
 
         protected TextView tvInstagramID, tvPaypalID, tvReportNum;
+        protected ImageView tvProofImg;
     }
 
 }
