@@ -1,10 +1,13 @@
 package com.example.kollect_final_project;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -51,6 +54,7 @@ public class CustomAdapterPosts extends BaseAdapter {
 
             holder.tvstatus = (TextView) convertView.findViewById(R.id.status);
             holder.tvUserID = (TextView) convertView.findViewById(R.id.userID);
+            holder.tvimagedata = (ImageView) convertView.findViewById(R.id.imageUpload);
 
 
             convertView.setTag(holder);
@@ -65,6 +69,9 @@ public class CustomAdapterPosts extends BaseAdapter {
         holder.tvprice.setText("Price: "+ posts.get(position).getPrice());
         holder.tvstatus.setText("Status: "+ posts.get(position).getStatus());
         holder.tvUserID.setText("User_ID: " + posts.get(position).getUserID());
+        byte[] pic = (posts.get(position).getImages());
+        Bitmap b = BitmapFactory.decodeByteArray(pic, 0, pic.length);
+        holder.tvimagedata.setImageBitmap(b);
 
         return convertView;
     }
@@ -72,5 +79,6 @@ public class CustomAdapterPosts extends BaseAdapter {
     private class ViewHolder {
 
         protected TextView tvSellername, tvArtistname,tvgroups, tvprice, tvstatus, tvUserID;
+        protected ImageView tvimagedata;
     }
 }
