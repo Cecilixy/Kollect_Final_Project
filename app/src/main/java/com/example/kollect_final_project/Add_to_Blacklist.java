@@ -41,7 +41,7 @@ public class Add_to_Blacklist extends AppCompatActivity {
         setContentView(R.layout.activity_add_to_blacklist);
 
         dbManager = new MySQLiteOpenHelper(this);
-        userReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        userReference = FirebaseDatabase.getInstance().getReference().child("Blacklist");
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
