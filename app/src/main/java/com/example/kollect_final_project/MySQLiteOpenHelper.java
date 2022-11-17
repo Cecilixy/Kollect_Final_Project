@@ -15,6 +15,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String DB_NAME="KollectData.db";//数据库名字
     private static final String TABLE_NAME_POSTS="Post";//表的名字
     private static final String TABLE_NAME_USER="User";//表的名字
+    private static final String TABLE_NAME_BLACKLIST="Blacklist";//表的名字
     private static final String KEY_ID = "id";
 
     public MySQLiteOpenHelper(Context context){
@@ -44,7 +45,12 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "premium integer DEFAULT 0, " +
                 "insta_id varchar(60))");
         db.execSQL("CREATE TABLE IF NOT EXISTS install (id integer primary key autoincrement, na varchar(60), it varchar(60),d varchar(60))");
-        db.execSQL("CREATE TABLE IF NOT EXISTS Blacklist (id integer primary key autoincrement, t varchar(60), st varchar(60),n1 varchar(60),n2 varchar(60),n varchar(60),m varchar(60),a varchar(60))");
+        db.execSQL("CREATE TABLE IF NOT EXISTS Blacklist (" +
+                "id integer primary key autoincrement, " +
+                "instagramID varchar(60), " +
+                "paypalID varchar(60)," +
+                "reportNum integer default 1," +
+                "proofImg blob)");
     }
 
     //这个方法是数据库升级的时候使用到的，因为我没有用到，所以就没有写
@@ -286,8 +292,96 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return id;
 
-
     }
+
+    /*
+
+
+        -------------------
+        BLACKLIST FUNCTIONALITY
+        -------------------
+
+
+
+     */
+
+
+    public void insertBlacklist(String instagramID, String paypalID, int reportNum){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("instagramID", instagramID);
+        values.put("paypalID", paypalID);
+        values.put("reportNum", reportNum);
+
+        db.insert(TABLE_NAME_BLACKLIST,null,values);
+    }
+
+    public void deleteBlacklistFromDbByNumber(int number){
+        SQLiteDatabase db=getWritableDatabase();
+        db.delete(TABLE_NAME_BLACKLIST, KEY_ID + " = ?",new String[]{String.valueOf(number)});
+    }
+
+    public void updateBlacklist(int id, String instagramID, String paypalID, int reportNum){
+        SQLiteDatabase db=getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("instagramID", instagramID);
+        values.put("paypalID", paypalID);
+        values.put("reportNum", reportNum);
+
+        db.update(TABLE_NAME_BLACKLIST, values, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+    }
+
+    public ArrayList<Blacklist> selectBlacklist(int number){
+        SQLiteDatabase db=getWritableDatabase();
+        ArrayList<Blacklist> blacklistList=new ArrayList<>();
+        Cursor cursor=db.query(TABLE_NAME_BLACKLIST,null,"id like ?",new String[] {String.valueOf(number)},null,null,null);
+        if(cursor!=null){
+            while (cursor.moveToNext()){
+                int instagramID=cursor.getColumnIndex("instagramID");
+                String instagramID1 = cursor.getString(instagramID);
+                int paypalID = cursor.getColumnIndex("paypalID");
+                String paypalID1= cursor.getString(paypalID);
+                int reportNum = cursor.getColumnIndex("reportNum");
+                int reportNum1 = cursor.getInt(reportNum);
+
+
+                Blacklist blacklist = new Blacklist();
+                blacklist.setInstagramID(instagramID1);
+                blacklist.setPaypalID(paypalID1);
+                blacklist.setReportNum(reportNum1);
+
+
+
+                blacklistList.add(blacklist);
+            }
+            cursor.close();
+        }
+        return blacklistList;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Blacklist> getAllBlacklist( ) {
+        String sqlQuery = "select * from " + TABLE_NAME_BLACKLIST;
+
+        SQLiteDatabase db = this.getWritableDatabase( );
+        Cursor cursor = db.rawQuery( sqlQuery, null );
+
+        ArrayList<Blacklist> blacklists = new ArrayList<Blacklist>( );
+        while( cursor.moveToNext( ) ) {
+            Blacklist blacklist
+                    = new Blacklist();
+            blacklist.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            blacklist.setInstagramID(cursor.getString(cursor.getColumnIndex("InstagramID")));
+            blacklist.setPaypalID(cursor.getString(cursor.getColumnIndex("paypalID")));
+            blacklist.setReportNum(cursor.getInt(cursor.getColumnIndex("reportNum")));
+
+
+            blacklists.add(blacklist);
+        }
+        db.close( );
+        return blacklists;
+    }
+
 
 
 }

@@ -1,47 +1,60 @@
 package com.example.kollect_final_project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import java.io.Serializable;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-public class Blacklist extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blacklist);
+public class Blacklist implements Serializable {
+    private int id ,reportNum;
+    private String InstagramID, paypalID;
+    private byte[] images;
 
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.favorite);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.favorite:
-                        startActivity(new Intent(getApplicationContext(),Favorite.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.search:
-                        startActivity(new Intent(getApplicationContext(),Search.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),Profile.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
-            }
-        });
+    public Blacklist() {
+    }
+
+    public Blacklist(String InstagramID, String paypalID, int reportNum) {
+        this.InstagramID = InstagramID;
+        this.paypalID = paypalID;
+        this.reportNum = reportNum;
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getReportNum() {
+        return reportNum;
+    }
+
+    public void setReportNum(int reportNum) {
+        this.reportNum = reportNum;
+    }
+
+    public String getInstagramID() {
+        return InstagramID;
+    }
+
+    public void setInstagramID(String instagramID) {
+        InstagramID = instagramID;
+    }
+
+    public String getPaypalID() {
+        return paypalID;
+    }
+
+    public void setPaypalID(String paypalID) {
+        this.paypalID = paypalID;
+    }
+
+    public byte[] getImages() {
+        return images;
+    }
+
+    public void setImages(byte[] images) {
+        this.images = images;
     }
 }
