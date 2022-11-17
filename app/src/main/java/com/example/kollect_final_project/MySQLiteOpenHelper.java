@@ -16,6 +16,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_POSTS="Post";//表的名字
     private static final String TABLE_NAME_USER="User";//表的名字
     private static final String TABLE_NAME_BLACKLIST="Blacklist";//表的名字
+    private static final String TABLE_NAME_FAVGROUPLIST="FavGroupList";//表的名字
+    private static final String FAVARTISTLIST="FavArtistlist";//表的名字
+
     private static final String KEY_ID = "id";
 
     public MySQLiteOpenHelper(Context context){
@@ -51,6 +54,11 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
                 "paypalID varchar(60)," +
                 "reportNum integer default 1," +
                 "proofImg blob)");
+    //    db.execSQL("CREATE TABLE IF NOT EXISTS FavGroupList("+
+      //          "id integer primary key autoincrement,"+
+        //        "username varchar(60) NOT NULL)"
+        //);
+
     }
 
     //这个方法是数据库升级的时候使用到的，因为我没有用到，所以就没有写

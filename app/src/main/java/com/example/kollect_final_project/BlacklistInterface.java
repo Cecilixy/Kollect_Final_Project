@@ -19,7 +19,6 @@ public class BlacklistInterface extends AppCompatActivity {
     private CustomAdapterBlacklist customAdapterBlacklist;
     private MySQLiteOpenHelper databaseHelper;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
