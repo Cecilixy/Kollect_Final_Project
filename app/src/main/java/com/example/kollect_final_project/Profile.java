@@ -83,6 +83,25 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        blacklist_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent blacklist = new Intent(getApplicationContext(),BlacklistInterface.class);
+
+                startActivity(blacklist);
+            }
+        });
+        blacklist_arr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent blacklist = new Intent(getApplicationContext(),BlacklistInterface.class);
+
+
+
+                startActivity(blacklist);
+            }
+        });
+
         instaButton = findViewById(R.id.instagram_btn);
         instaButton.setOnClickListener(new View.OnClickListener() {
             @Override
