@@ -22,8 +22,7 @@ public class Premium extends AppCompatActivity implements         GestureDetecto
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_premium);
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_change_personal_info);
         mDetector = new GestureDetectorCompat(this,this);
         // Set the gesture detector as the double tap
