@@ -116,7 +116,7 @@ public class Profile extends AppCompatActivity {
                     startActivity(likeIng);
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://instagram.com/_u/"+_INSTALINK)));
+                            Uri.parse("http://google.com")));
                 }
             }
         });

@@ -89,6 +89,7 @@ public class Favorite extends AppCompatActivity implements AddFavoriteDialog.Add
             public void onClick(View view) {
                 openDialog();
             }
+
         });
         addArtist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +107,6 @@ public class Favorite extends AppCompatActivity implements AddFavoriteDialog.Add
     @Override
     public void applyText(String groupname) {
         arrayList1.add(groupname);
-        Intent intent = new Intent(Favorite.this, AddFavoriteDialog.class);
-        startActivity(intent);
+
     }
 }
