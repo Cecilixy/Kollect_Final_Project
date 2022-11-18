@@ -7,13 +7,16 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class AddFavoriteDialog extends AppCompatDialogFragment {
     private EditText editgroup;
+    private Switch addwhat;
     private AddFavoriteDialogListener addFavoriteDialogListener;
     @Override
     public Dialog onCreateDialog(Bundle saveInstanceState){
@@ -21,7 +24,7 @@ public class AddFavoriteDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.favorite_group_dialog, null);
 
-        builder.setView(view).setTitle("enter a new group").setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("enter your favorite").setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -31,11 +34,11 @@ public class AddFavoriteDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                             String groupname = editgroup.getText().toString();
-                        addFavoriteDialogListener.applyText(groupname);
+                        addFavoriteDialogListener.applyTexts(groupname,addwhat);
                     }
                 });
         editgroup = view.findViewById(R.id.editgroup);
-
+        addwhat = view.findViewById(R.id.switch1);
         return builder.create();
 
     }
@@ -50,6 +53,7 @@ public class AddFavoriteDialog extends AppCompatDialogFragment {
         }
     }
     public interface AddFavoriteDialogListener{
-        void applyText(String groupname);
+        void applyTexts(String groupname, Switch what);
     }
+
 }

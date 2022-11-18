@@ -109,7 +109,6 @@ public class Profile extends AppCompatActivity {
                 Log.w("MainActivity",_INSTALINK);
                 Uri uri = Uri.parse("http://instagram.com/_u/"+_INSTALINK);
                 Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-
                 likeIng.setPackage("com.instagram.android");
 
                 try {
