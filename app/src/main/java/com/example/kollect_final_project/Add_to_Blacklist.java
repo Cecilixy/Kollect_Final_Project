@@ -29,7 +29,7 @@ public class Add_to_Blacklist extends AppCompatActivity {
     private Button btnSubmit;
     private EditText etUsername, etPaypalID;
     private FirebaseDatabase myFirebasedata;
-    private DatabaseReference userReference;
+    private DatabaseReference blacklistReference;
     long maxid = 0;
 
     private final int GALLERY_REQUEST_CODE = 1000;
@@ -41,8 +41,8 @@ public class Add_to_Blacklist extends AppCompatActivity {
         setContentView(R.layout.activity_add_to_blacklist);
 
         dbManager = new MySQLiteOpenHelper(this);
-        userReference = FirebaseDatabase.getInstance().getReference().child("Blacklist");
-        userReference.addValueEventListener(new ValueEventListener() {
+        blacklistReference = FirebaseDatabase.getInstance().getReference().child("Blacklist");
+        blacklistReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -86,9 +86,9 @@ public class Add_to_Blacklist extends AppCompatActivity {
                     int id = dbManager.getAutoIncrements() + 1;
 
                     dbManager.insertBlacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1, bArray);
-                    Blacklist addedUser = new Blacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1, bArray);
+                    Blacklist addedUser = new Blacklist(etUsername.getText().toString(), etPaypalID.getText().toString(), 1);
                     addedUser.setId((int) (maxid + 1));
-                    userReference.child(etUsername.getText().toString()).setValue(addedUser);
+                    blacklistReference.child(etUsername.getText().toString()).setValue(addedUser);
                 }
                     etUsername.setText("");
                     etPaypalID.setText("");

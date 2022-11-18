@@ -11,11 +11,11 @@ public class Blacklist implements Serializable {
     public Blacklist() {
     }
 
-    public Blacklist(String InstagramID, String paypalID, int reportNum, byte[] images) {
+    public Blacklist(String InstagramID, String paypalID, int reportNum) {
         this.InstagramID = InstagramID;
         this.paypalID = paypalID;
         this.reportNum = reportNum;
-        this.images = images;
+
     }
 
     public int getId() {
