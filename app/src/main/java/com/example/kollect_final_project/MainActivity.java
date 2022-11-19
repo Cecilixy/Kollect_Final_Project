@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity{
     private Button btnStore, btnGetall;
     private EditText etsname, etgroups, etprice,etaname,etstatus;
     private FirebaseDatabase myFirebasedata;
+    private String _USERNAME,_GENDER,_INSTALINK,_PASSWORD;
+
 
 
     @Override
@@ -41,6 +43,13 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         myFirebasedata = FirebaseDatabase.getInstance();
 
+
+        Intent intent = getIntent();
+
+        _USERNAME = intent.getStringExtra("user_name");
+        _GENDER = intent.getStringExtra("gender");
+        _INSTALINK = intent.getStringExtra("insta_id");
+        _PASSWORD = intent.getStringExtra("password");
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -62,7 +71,14 @@ public class MainActivity extends AppCompatActivity{
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),Profile.class));
+                        Intent changeIfo = new Intent(getApplicationContext(),Profile.class);
+                        changeIfo.putExtra("user_name",_USERNAME);
+                        changeIfo.putExtra("gender",_GENDER);
+                        changeIfo.putExtra("insta_id",_INSTALINK);
+                        changeIfo.putExtra("password",_PASSWORD);
+
+
+                        startActivity(changeIfo);
                         overridePendingTransition(0,0);
                         return true;
                 }

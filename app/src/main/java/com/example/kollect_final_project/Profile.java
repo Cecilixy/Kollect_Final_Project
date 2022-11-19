@@ -29,7 +29,7 @@ public class Profile extends AppCompatActivity {
     private TextView blacklist_txt;
     private ImageView blacklist_arr;
     private Button instaButton;
-    String _USERNAME, _GENDER, _PASSWORD, _INSTALINK;
+    private String _USERNAME,_GENDER,_INSTALINK,_PASSWORD,_FAVARTIST,_FAVGROUP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,21 +49,31 @@ public class Profile extends AppCompatActivity {
         blacklist_arr = (ImageView)findViewById(R.id.blacklist_arr);
 
         Intent intent = getIntent();
-        _USERNAME = intent.getStringExtra("user_name");
-        _GENDER = intent.getStringExtra("gender");
-        _INSTALINK = intent.getStringExtra("insta_id");
-        _PASSWORD = intent.getStringExtra("password");
+
+            _USERNAME = intent.getStringExtra("user_name");
+            _GENDER = intent.getStringExtra("gender");
+            _INSTALINK = intent.getStringExtra("insta_id");
+            _PASSWORD = intent.getStringExtra("password");
+            _FAVARTIST = intent.getStringExtra("fav_artist");
+            _FAVGROUP = intent.getStringExtra("fav_group");
+
+        if (savedInstanceState != null) {
+            _USERNAME = savedInstanceState.getString("user_name");
+
+        }
+
         username.setText(_USERNAME);
         change_info_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 Intent changeIfo = new Intent(getApplicationContext(),UserProfileUpdate.class);
                 changeIfo.putExtra("user_name",_USERNAME);
                 changeIfo.putExtra("gender",_GENDER);
                 changeIfo.putExtra("insta_id",_INSTALINK);
                 changeIfo.putExtra("password",_PASSWORD);
+                changeIfo.putExtra("fav_artist",_FAVARTIST);
+                changeIfo.putExtra("fav_group",_FAVGROUP);
                 startActivity(changeIfo);
             }
         });
@@ -71,14 +81,13 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
                 Intent changeIfo = new Intent(getApplicationContext(),UserProfileUpdate.class);
                 changeIfo.putExtra("user_name",_USERNAME);
                 changeIfo.putExtra("gender",_GENDER);
                 changeIfo.putExtra("insta_id",_INSTALINK);
                 changeIfo.putExtra("password",_PASSWORD);
-
+                changeIfo.putExtra("fav_artist",_FAVARTIST);
+                changeIfo.putExtra("fav_group",_FAVGROUP);
 
                 startActivity(changeIfo);
             }
@@ -128,7 +137,15 @@ public class Profile extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        Intent changeIfo = new Intent(getApplicationContext(),MainActivity.class);
+                        changeIfo.putExtra("user_name",_USERNAME);
+                        changeIfo.putExtra("gender",_GENDER);
+                        changeIfo.putExtra("insta_id",_INSTALINK);
+                        changeIfo.putExtra("password",_PASSWORD);
+                        changeIfo.putExtra("fav_artist",_FAVARTIST);
+                        changeIfo.putExtra("fav_group",_FAVGROUP);
+
+                        startActivity(changeIfo);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.favorite:
@@ -148,4 +165,20 @@ public class Profile extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        super.onSaveInstanceState(outState);
+        outState.putString("user_name", username.getText().toString());
+
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        _USERNAME = savedInstanceState.getString("user_name");
+
+    }
+
 }

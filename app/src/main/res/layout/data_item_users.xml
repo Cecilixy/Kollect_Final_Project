@@ -52,6 +52,26 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#fff" />
 
+        <TextView
+            android:id="@+id/fav_artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Favourite Artist"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/fav_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="Favourite Group"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff" />
+
 
 
 
@@ -63,6 +83,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#F00F"/>
+        android:background="#82B1FF"/>
 
 </LinearLayout>

@@ -28,7 +28,8 @@
        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SignUp to start your new Journey"
+           android:layout_marginTop="-20dp"
+           android:text="SignUp to start your new Journey"
         android:textSize="18sp"
         android:transitionName="logo_desc" />
 
@@ -76,6 +77,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Instagram ID">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etfavartist"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Favourite Artist">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etfavgroup"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Favourite Group">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

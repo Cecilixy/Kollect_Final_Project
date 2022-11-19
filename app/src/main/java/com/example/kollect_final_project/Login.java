@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.util.Pair;
 import com.google.android.material.textfield.TextInputLayout;
@@ -27,13 +28,10 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 
     Button callSignUp, login_btn;
-
     ImageView image;
-
     TextView logoText, sloganText;
-
     TextInputLayout username, password;
-
+    ProgressBar progressBar;
     public static int USERID = (-1);
 
     @Override
@@ -48,6 +46,8 @@ public class Login extends AppCompatActivity {
 
         //Hooks
 
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         callSignUp = findViewById(R.id.sign_up);
 
         image = findViewById(R.id.logo_image);
@@ -134,6 +134,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void isUser(){
+        progressBar.setVisibility(View.VISIBLE);
         final String userEnteredUsername = username.getEditText().getText().toString().trim();
         final String userEnteredPassword = password.getEditText().getText().toString().trim();
 
@@ -156,6 +157,8 @@ public class Login extends AppCompatActivity {
                         String usernameFromDb = dataSnapshot.child(userEnteredUsername).child("user_name").getValue(String.class);
                         String genderFromDb = dataSnapshot.child(userEnteredUsername).child("gender").getValue(String.class);
                         String instaidFromDb = dataSnapshot.child(userEnteredUsername).child("insta_id").getValue(String.class);
+                        String favartistFromDb = dataSnapshot.child(userEnteredUsername).child("fav_artist").getValue(String.class);
+                        String favgroupFromDb = dataSnapshot.child(userEnteredUsername).child("fav_group").getValue(String.class);
                         USERID = dataSnapshot.child(userEnteredUsername).child("id").getValue(Integer.class);
 
                         Intent intent = new Intent(getApplicationContext(),Profile.class);
@@ -163,6 +166,8 @@ public class Login extends AppCompatActivity {
                         intent.putExtra("gender",genderFromDb);
                         intent.putExtra("insta_id",instaidFromDb);
                         intent.putExtra("password",passwordFromDB);
+                        intent.putExtra("fav_artist",favartistFromDb);
+                        intent.putExtra("fav_group",favgroupFromDb);
 
                         startActivity(intent);
 

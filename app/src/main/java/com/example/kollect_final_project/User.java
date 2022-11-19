@@ -3,8 +3,8 @@ package com.example.kollect_final_project;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private int id ,fav_artist_id, fav_group_id, premium;
-    private String username, password, gender, insta_id;
+    private int id , premium;
+    private String username, password, gender, insta_id,fav_artist,fav_group;
 
 
     public User() {
@@ -21,9 +21,9 @@ public class User implements Serializable {
         this.id = newId;
     }
 
-//    public void setFav_artist_id(int newId) {this.fav_artist_id = newId;}
-//
-//    public void setFav_group_id(int newId) {this.fav_group_id = newId;}
+    public void setFav_artist(String newId) {this.fav_artist = newId;}
+
+    public void setFav_group(String newId) {this.fav_group = newId;}
 //
 //    public void setPremium(int newPremium) {this.premium = newPremium;}
 
@@ -35,13 +35,13 @@ public class User implements Serializable {
 
     public void setInsta_id(String newInstaID) {this.insta_id = newInstaID;}
 
-//    public int getFav_artist_id() {
-//        return fav_artist_id;
-//    }
-//
-//    public int getFav_group_id() {
-//        return fav_group_id;
-//    }
+    public String getFav_artist() {
+        return fav_artist;
+    }
+
+    public String getFav_group() {
+        return fav_group;
+    }
 //
 //    public int getPremium() {
 //        return premium;

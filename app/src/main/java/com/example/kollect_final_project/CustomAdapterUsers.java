@@ -48,6 +48,8 @@ public class CustomAdapterUsers extends BaseAdapter {
             holder.tvGender = (TextView) convertView.findViewById(R.id.gender);
             holder.tvPassword = (TextView) convertView.findViewById(R.id.password);
             holder.tvInstagramID= (TextView) convertView.findViewById(R.id.instagram_id);
+            holder.tvFavArtist = (TextView) convertView.findViewById(R.id.fav_artist);
+            holder.tvFavGroup = (TextView) convertView.findViewById(R.id.fav_group);
 
             convertView.setTag(holder);
         }else {
@@ -59,6 +61,8 @@ public class CustomAdapterUsers extends BaseAdapter {
         holder.tvGender.setText("Gender: "+ users.get(position).getGender());
         holder.tvPassword.setText("Password: "+ users.get(position).getPassword());
         holder.tvInstagramID.setText("Instagram ID: "+ users.get(position).getInsta_id());
+        holder.tvFavArtist.setText("Favorite Artist: "+ users.get(position).getFav_artist());
+        holder.tvFavGroup.setText("Favorite Group: "+ users.get(position).getFav_group());
 
 
         return convertView;
@@ -66,6 +70,6 @@ public class CustomAdapterUsers extends BaseAdapter {
 
     private class ViewHolder {
 
-        protected TextView tvUsername, tvGender,tvPassword, tvInstagramID;
+        protected TextView tvUsername, tvGender,tvPassword, tvInstagramID, tvFavArtist, tvFavGroup;
     }
 }

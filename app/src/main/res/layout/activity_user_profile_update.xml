@@ -89,6 +89,34 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fav_artist_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Favorite Artist">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/username_small_icon"
+                    android:drawablePadding="10dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fav_group_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Favorite Group">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/username_small_icon"
+                    android:drawablePadding="10dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

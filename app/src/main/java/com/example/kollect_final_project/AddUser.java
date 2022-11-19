@@ -23,7 +23,7 @@ public class AddUser extends AppCompatActivity {
 
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
-    private TextInputLayout etUsername, etGender, etInstagramID, etPassword;
+    private TextInputLayout etUsername, etGender, etInstagramID, etPassword,etFavoriteArtist,etFavoriteGroup;
     private FirebaseDatabase myFirebasedata;
     private DatabaseReference userReference;
     long maxid = 0;
@@ -57,6 +57,9 @@ public class AddUser extends AppCompatActivity {
         etGender =  findViewById(R.id.etGender);
         etInstagramID =  findViewById(R.id.etInstagramID);
         etPassword =  findViewById(R.id.etPassword);
+        etFavoriteArtist =  findViewById(R.id.etfavartist);
+        etFavoriteGroup =  findViewById(R.id.etfavgroup);
+
 
         // add default user
 
@@ -70,14 +73,20 @@ public class AddUser extends AppCompatActivity {
                 String gender = etGender.getEditText().getText().toString();
                 String instagramID = etInstagramID.getEditText().getText().toString();
                 String password = etPassword.getEditText().getText().toString();
+                String Favartist = etFavoriteArtist.getEditText().getText().toString();
+                String Favgroup = etFavoriteGroup.getEditText().getText().toString();
                 dbManager.insertUser(username, password, gender, instagramID);
                 User addedUser = new User(username, password, gender, instagramID);
                 addedUser.setId((int)(maxid + 1));
+                addedUser.setFav_artist(Favartist);
+                addedUser.setFav_group(Favgroup);
                 userReference.child(username).setValue(addedUser);
                 etUsername.getEditText().setText("");
                 etPassword.getEditText().setText("");
                 etGender.getEditText().setText("");
                 etInstagramID.getEditText().setText("");
+                etFavoriteArtist.getEditText().setText("");
+                etFavoriteGroup.getEditText().setText("");
                 Toast.makeText(AddUser.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddUser.this, Login.class);
                 startActivity(intent);
