@@ -1,122 +1,155 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".AddPost">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+
     <TextView
-        android:layout_width="341dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="53dp"
-        android:gravity="center"
-        android:text="Enter Names,Artist Groups,Price, Status to store in SQLite"
-        android:textColor="#ff0f"
-        android:textSize="15sp" />
-
-
-    <EditText
-        android:id="@+id/etsname"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="48dp"
-        android:background="#fff"
-        android:hint="Enter Seller Name" />
-
-    <EditText
-        android:id="@+id/etaname"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="101dp"
-        android:background="#fff"
-        android:hint="Enter Artist Name" />
-
-    <EditText
-        android:id="@+id/etprice"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="226dp"
-        android:background="#fff"
-        android:hint="Enter Price"
-        android:inputType="number" />
-
-    <EditText
-        android:id="@+id/etgroup"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="161dp"
-        android:background="#fff"
-        android:hint="Enter Groups" />
-
-    <EditText
-        android:id="@+id/etstatus"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="295dp"
-        android:background="#fff"
-        android:hint="Enter Status"
-        android:inputType="number" />
-
-    <Button
-        android:id="@+id/btnstore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="441dp"
-        android:text="Store" />
+        android:layout_marginTop="-10dp"
+        android:fontFamily="@font/bungee"
+        android:text="Add your post here,"
+        android:textColor="#000"
+        android:textSize="30sp"
+        android:transitionName="logo_text" />
 
-    <Button
-        android:id="@+id/btnget"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="356dp"
-        android:text="Get All Posts from SQLite" />
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="512dp"
-        android:onClick="newActivity"
-        android:text="Back to Home" />
 
-    <ImageView
-        android:id="@+id/imageUpload"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="423dp"
-        android:layout_marginEnd="42dp"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
-</RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etsname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter seller name"
+            android:transitionName="sellername_tran"
+            app:counterMaxLength="15">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etaname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Artist Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etgroup"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Group Name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etprice"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Price">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etstatus"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Status">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/imageUpload"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="42dp"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+
+        <Button
+            android:id="@+id/btnstore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-5dp"
+            android:backgroundTint="#80D8FF"
+            android:text="Store" />
+
+        <Button
+            android:id="@+id/btnget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#80D8FF"
+            android:text="Get All Posts from SQLite" />
+
+        <Button
+            android:id="@+id/btnback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#80D8FF"
+            android:onClick="newActivity"
+            android:text="Back to Home" />
+
+
+
+
+
+
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

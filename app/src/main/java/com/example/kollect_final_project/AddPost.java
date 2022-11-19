@@ -16,13 +16,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.ByteArrayOutputStream;
 
 public class AddPost extends AppCompatActivity {
 
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
-    private EditText etsname, etgroups, etprice,etaname,etstatus;
+    private TextInputLayout etsname, etgroups, etprice,etaname,etstatus;
     private final int GALLERY_REQUEST_CODE = 1000;
     ImageView imgGallery;
     @Override
@@ -35,11 +37,11 @@ public class AddPost extends AppCompatActivity {
 
         btnStore = (Button) findViewById(R.id.btnstore);
         btnGetall = (Button) findViewById(R.id.btnget);
-        etsname = (EditText) findViewById(R.id.etsname);
-        etaname = (EditText) findViewById(R.id.etaname);
-        etstatus = (EditText) findViewById(R.id.etstatus);
-        etgroups = (EditText) findViewById(R.id.etgroup);
-        etprice = (EditText) findViewById(R.id.etprice);
+        etsname = findViewById(R.id.etsname);
+        etaname = findViewById(R.id.etaname);
+        etstatus = findViewById(R.id.etstatus);
+        etgroups = findViewById(R.id.etgroup);
+        etprice = findViewById(R.id.etprice);
 
         imgGallery = (ImageView) findViewById(R.id.imageUpload);
         imgGallery.setOnClickListener(new View.OnClickListener() {
@@ -58,15 +60,21 @@ public class AddPost extends AppCompatActivity {
             public void onClick(View v) {
                 Bitmap photo = ((BitmapDrawable)imgGallery.getDrawable()).getBitmap();
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                photo.compress(Bitmap.CompressFormat.PNG, 100, bos);
+                photo.compress(Bitmap.CompressFormat.JPEG, 100, bos);
                 byte[] bArray = bos.toByteArray();
 
-                dbManager.insertPost(etsname.getText().toString(), etaname.getText().toString(), etgroups.getText().toString(), Integer.parseInt(etprice.getText().toString()),Integer.parseInt(etstatus.getText().toString()),USERID,bArray);
-                etsname.setText("");
-                etaname.setText("");
-                etstatus.setText("");
-                etgroups.setText("");
-                etprice.setText("");
+                String sname = etsname.getEditText().getText().toString();
+                String aname = etaname.getEditText().getText().toString();
+                int status = Integer.parseInt(etstatus.getEditText().getText().toString());
+                String groups = etgroups.getEditText().getText().toString();
+                int price = Integer.parseInt(etprice.getEditText().getText().toString());
+
+                dbManager.insertPost(sname, aname, groups, price,status,USERID,bArray);
+                etsname.getEditText().setText("");
+                etaname.getEditText().setText("");
+                etstatus.getEditText().setText("");
+                etgroups.getEditText().setText("");
+                etprice.getEditText().setText("");
                 Toast.makeText(AddPost.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
             }
         });
