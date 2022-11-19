@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 public class Favorite extends AppCompatActivity implements AddFavoriteDialog.AddFavoriteDialogListener {
     private RecyclerView recyclerView1;
     private ArrayList<String> arrayList1;
+    private ArrayList<String> arrayList2;
     private RecyclerView recyclerView2;
     private Button addGroup;
     private Button addArtist;
@@ -62,33 +65,27 @@ public class Favorite extends AppCompatActivity implements AddFavoriteDialog.Add
             }
         });
         arrayList1 = new ArrayList<String>();
+        arrayList2 = new ArrayList<String>();
         arrayList1.add("aaa");
-        arrayList1.add("bbb");
-        arrayList1.add("ccc");
-        arrayList1.add("ddd");
-        arrayList1.add("eee");
-        arrayList1.add("fff");
-
-        LinearLayoutManager  linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        arrayList1.add("aaa");
+        arrayList2.add("bbb");
+        arrayList2.add("bbb");
+        arrayList2.add("bbb");
+        arrayList2.add("bbb");
+        recyclerView1.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         favGroupAdapter myAdapter = new favGroupAdapter(arrayList1);
         recyclerView1.setAdapter(myAdapter);
 
-        LinearLayoutManager  linearLayoutManager2 = new LinearLayoutManager(getApplicationContext());
-        recyclerView2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        favGroupAdapter myAdapter2 = new favGroupAdapter(arrayList1);
+        recyclerView2.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+        favGroupAdapter myAdapter2 = new favGroupAdapter(arrayList2);
         recyclerView2.setAdapter(myAdapter2);
-       // addArtist.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View view) {
-                //if(!edtName.getText)
-          //  }
-      //  });
+
         addGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDialog();
             }
+
         });
         addArtist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +99,13 @@ public class Favorite extends AppCompatActivity implements AddFavoriteDialog.Add
             AddFavoriteDialog addFavoriteDialog = new AddFavoriteDialog();
             addFavoriteDialog.show(getSupportFragmentManager(),"example dialog");
     }
-
     @Override
-    public void applyText(String groupname) {
-        arrayList1.add(groupname);
-        Intent intent = new Intent(Favorite.this, AddFavoriteDialog.class);
-        startActivity(intent);
+    public void applyTexts(String groupname, Switch what) {
+        if(!what.isChecked()){
+            arrayList1.add(groupname);
+        }else{
+            arrayList2.add(groupname);
+        }
     }
+
 }

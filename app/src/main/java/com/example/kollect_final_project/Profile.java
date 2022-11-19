@@ -111,14 +111,13 @@ public class Profile extends AppCompatActivity {
 
                 Uri uri = Uri.parse("http://instagram.com/_u/"+_INSTALINK);
                 Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-
                 likeIng.setPackage("com.instagram.android");
 
                 try {
                     startActivity(likeIng);
                 } catch (ActivityNotFoundException e) {
                     startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://instagram.com/_u/"+_INSTALINK)));
+                            Uri.parse("http://google.com")));
                 }
             }
         });
