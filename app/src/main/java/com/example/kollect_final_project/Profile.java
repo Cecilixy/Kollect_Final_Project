@@ -29,7 +29,7 @@ public class Profile extends AppCompatActivity {
     private TextView blacklist_txt;
     private ImageView blacklist_arr;
     private Button instaButton;
-    String _USERNAME, _INSTALINK, _GENDER, _PASSWORD;
+    String _USERNAME, _GENDER, _PASSWORD, _INSTALINK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class Profile extends AppCompatActivity {
         get_pre_arr = (ImageView)findViewById(R.id.get_pre_arr);
         blacklist_txt = (TextView)findViewById(R.id.blacklist_txt);
         blacklist_arr = (ImageView)findViewById(R.id.blacklist_arr);
+
         Intent intent = getIntent();
         _USERNAME = intent.getStringExtra("user_name");
         _GENDER = intent.getStringExtra("gender");
@@ -106,7 +107,8 @@ public class Profile extends AppCompatActivity {
         instaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.w("MainActivity",_INSTALINK);
+
+
                 Uri uri = Uri.parse("http://instagram.com/_u/"+_INSTALINK);
                 Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
 

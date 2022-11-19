@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +23,7 @@ public class AddUser extends AppCompatActivity {
 
     private MySQLiteOpenHelper dbManager;
     private Button btnStore, btnGetall;
-    private EditText etUsername, etGender, etInstagramID, etPassword;
+    private TextInputLayout etUsername, etGender, etInstagramID, etPassword;
     private FirebaseDatabase myFirebasedata;
     private DatabaseReference userReference;
     long maxid = 0;
@@ -52,10 +53,10 @@ public class AddUser extends AppCompatActivity {
 
         btnStore = (Button) findViewById(R.id.btnstore);
         btnGetall = (Button) findViewById(R.id.btnget);
-        etUsername = (EditText) findViewById(R.id.etUsername);
-        etGender = (EditText) findViewById(R.id.etGender);
-        etInstagramID = (EditText) findViewById(R.id.etInstagramID);
-        etPassword = (EditText) findViewById(R.id.etPassword);
+        etUsername =  findViewById(R.id.etUsername);
+        etGender =  findViewById(R.id.etGender);
+        etInstagramID =  findViewById(R.id.etInstagramID);
+        etPassword =  findViewById(R.id.etPassword);
 
         // add default user
 
@@ -65,14 +66,18 @@ public class AddUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int id = dbManager.getAutoIncrements() + 1;
-                dbManager.insertUser(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
-                User addedUser = new User(etUsername.getText().toString(), etPassword.getText().toString(), etGender.getText().toString(), etInstagramID.getText().toString());
+                String username = etUsername.getEditText().getText().toString();
+                String gender = etGender.getEditText().getText().toString();
+                String instagramID = etInstagramID.getEditText().getText().toString();
+                String password = etPassword.getEditText().getText().toString();
+                dbManager.insertUser(username, password, gender, instagramID);
+                User addedUser = new User(username, password, gender, instagramID);
                 addedUser.setId((int)(maxid + 1));
-                userReference.child(etUsername.getText().toString()).setValue(addedUser);
-                etUsername.setText("");
-                etPassword.setText("");
-                etGender.setText("");
-                etInstagramID.setText("");
+                userReference.child(username).setValue(addedUser);
+                etUsername.getEditText().setText("");
+                etPassword.getEditText().setText("");
+                etGender.getEditText().setText("");
+                etInstagramID.getEditText().setText("");
                 Toast.makeText(AddUser.this, "Stored Successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(AddUser.this, Login.class);
                 startActivity(intent);

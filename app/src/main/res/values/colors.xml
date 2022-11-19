@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#5C4DB1</color>
     <color name="yellow">#FFBF67</color>
+    <color name="clr_normal">#ff6eff2d</color>
+    <color name="clr_pressed">#669966</color>
 </resources>

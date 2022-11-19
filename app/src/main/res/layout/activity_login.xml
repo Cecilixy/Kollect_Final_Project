@@ -1,78 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".Login">
 
-        xmlns:tools="http://schemas.android.com/tools"
-
+    <LinearLayout
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
-
-        tools:context=".Login"
-
-        android:orientation="vertical"
-
         android:background="#fff"
+        android:orientation="vertical">
 
-        android:padding="20dp">
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:transitionName="logo_image"
+            android:src="@drawable/pig"/>
 
-    <ImageView
-
-        android:id="@+id/logo_image"
-
-        android:layout_width="150dp"
-
-        android:layout_height="150dp"
-
-        android:transitionName="logo_image"
-
-        android:src="@drawable/pig"/>
-
-
-    <TextView
-
-        android:id="@+id/logo_name"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:fontFamily="@font/bungee"
-
-        android:text="Hello there, Welcome Back"
-
-        android:textColor="#000"
-
-
-        android:textSize="40sp"
-        android:transitionName="logo_text" />
 
         <TextView
-
-            android:id="@+id/slogan_name"
-
+            android:id="@+id/logo_name"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bungee"
+            android:text="Hello there, Welcome Back"
+            android:textColor="#000"
+            android:textSize="40sp"
+            android:transitionName="logo_text" />
 
+        <TextView
+            android:id="@+id/slogan_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Sign In to continue"
-
             android:textSize="18sp"/>
 
         <LinearLayout
-
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
-
             android:layout_marginTop="20dp"
-
             android:layout_marginBottom="20dp"
-
             android:orientation="vertical">
-
             <com.google.android.material.textfield.TextInputLayout
 
                 android:layout_width="match_parent"
@@ -94,85 +69,66 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-
                 android:id="@+id/password"
-
                 android:hint="Password"
-
                 app:passwordToggleEnabled="true"
-
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
-
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
-
                     android:inputType="textPassword"/>
-
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-
-                android:layout_width="200dp"
-
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_gravity="right"
-
-                android:layout_margin="5dp"
-
-                android:background="#000"
-
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="#008577"
                 android:elevation="0dp"
-
-                android:text="Forget Password?" />
+                android:text="Forget Password?"
+                tools:ignore="TextContrastCheck" />
 
             <Button
-
                 android:id="@+id/login_btn"
-
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="5dp"
-
                 android:layout_marginBottom="5dp"
-
-                android:background="#000"
-
+                android:backgroundTint="#008577"
                 android:onClick="loginUser"
-
                 android:text="GO"
                 android:textColor="#fff" />
 
             <Button
-
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
-
                 android:layout_gravity="right"
-
                 android:layout_margin="5dp"
-
-                android:background="#00000000"
-
+                android:backgroundTint="#00000000"
                 android:elevation="0dp"
-
                 android:id="@+id/sign_up"
-
-
                 android:text="New User? SIGN UP"
-
                 android:textColor="#000"/>
 
         </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+        </LinearLayout>
+
+
+</ScrollView>
