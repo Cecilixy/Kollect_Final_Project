@@ -22,6 +22,8 @@ public class SearchResult extends AppCompatActivity {
     private String artist_name;
     private String group_name;
     private String blacklist_name;
+    private ArrayList<Blacklist> blacklistModelArrayList;
+    private CustomAdapterBlacklist customAdapterBlacklist;
 
 
 
@@ -46,11 +48,17 @@ public class SearchResult extends AppCompatActivity {
 
         if (group_name != null){
 
-            userModelArrayList = databaseHelper.getSearchedGroupPosts(group_name);}
+            userModelArrayList = databaseHelper.getSearchedGroupPosts(group_name);
+            customAdapterPosts = new CustomAdapterPosts(this,userModelArrayList);
+            listView.setAdapter(customAdapterPosts);}
         else if (artist_name != null){
-            userModelArrayList = databaseHelper.getSearchedGroupPosts(artist_name);
+            userModelArrayList = databaseHelper.getSearchedArtistPosts(artist_name);
+            customAdapterPosts = new CustomAdapterPosts(this,userModelArrayList);
+            listView.setAdapter(customAdapterPosts);
         }else if (blacklist_name != null){
-            userModelArrayList = databaseHelper.getSearchedGroupPosts(blacklist_name);}
+            blacklistModelArrayList = databaseHelper.getSearchedBlacklistPosts(blacklist_name);
+            customAdapterBlacklist = new CustomAdapterBlacklist(this,blacklistModelArrayList);
+            listView.setAdapter(customAdapterBlacklist);}
 
 
         customAdapterPosts = new CustomAdapterPosts(this,userModelArrayList);
