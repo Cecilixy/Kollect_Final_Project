@@ -171,6 +171,60 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         return posts;
     }
 
+    @SuppressLint("Range")
+    public ArrayList<Post> getSearchedGroupPosts(String group_name ) {
+        String sqlQuery = "select * from " + TABLE_NAME_POSTS + " WHERE " + "group_name" + " = ?";
+
+
+        SQLiteDatabase db = this.getWritableDatabase( );
+        Cursor cursor = db.rawQuery( sqlQuery, null );
+
+        ArrayList<Post> posts = new ArrayList<Post>( );
+        while( cursor.moveToNext( ) ) {
+            Post post
+                    = new Post();
+            post.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            post.setSellerName(cursor.getString(cursor.getColumnIndex("seller_name")));
+            post.setArtistname(cursor.getString(cursor.getColumnIndex("artist_name")));
+            post.setGroups(cursor.getString(cursor.getColumnIndex("artist_group")));
+            post.setStatus(cursor.getInt(cursor.getColumnIndex("status")));
+            post.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+            post.setUserID(cursor.getInt(cursor.getColumnIndex("user_id")));
+            post.setImages(cursor.getBlob(cursor.getColumnIndex("post_images")));
+
+            posts.add(post);
+        }
+        db.close( );
+        return posts;
+    }
+
+
+    @SuppressLint("Range")
+    public ArrayList<Blacklist> getSearchedBlacklistPosts(String instagramID ) {
+
+        String sqlQuery = "select * from " + TABLE_NAME_BLACKLIST;
+
+        SQLiteDatabase db = this.getWritableDatabase( );
+        Cursor cursor=db.query(TABLE_NAME_BLACKLIST,null,"instagramID = ?",new String[] {instagramID},null,null,null);
+
+        ArrayList<Blacklist> blacklists = new ArrayList<Blacklist>( );
+        while( cursor.moveToNext( ) ) {
+            Blacklist blacklist
+                    = new Blacklist();
+            blacklist.setId(cursor.getInt(cursor.getColumnIndex("id")));
+            blacklist.setInstagramID(cursor.getString(cursor.getColumnIndex("instagramID")));
+            blacklist.setPaypalID(cursor.getString(cursor.getColumnIndex("paypalID")));
+            blacklist.setReportNum(cursor.getInt(cursor.getColumnIndex("reportNum")));
+            blacklist.setImages(cursor.getBlob(cursor.getColumnIndex("proofImg")));
+
+
+            blacklists.add(blacklist);
+        }
+        db.close( );
+        return blacklists;
+    }
+
+
     /*
 
 
@@ -361,6 +415,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
 
     }
+
+
+
 
     public boolean ifBlacklistExistsByInstagram (String instagramID){
         SQLiteDatabase db = getReadableDatabase();
