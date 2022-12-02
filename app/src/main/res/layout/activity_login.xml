@@ -22,7 +22,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:transitionName="logo_image"
-            android:src="@drawable/pig"/>
+            android:src="@drawable/logo"/>
 
 
         <TextView
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:backgroundTint="#008577"
+                android:backgroundTint="#fc7fb6"
                 android:elevation="0dp"
                 android:text="Forget Password?"
                 tools:ignore="TextContrastCheck" />
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:backgroundTint="#008577"
+                android:backgroundTint="#fc7fb6"
                 android:onClick="loginUser"
                 android:text="GO"
                 android:textColor="#fff" />
