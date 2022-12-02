@@ -173,7 +173,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public ArrayList<Post> getSearchedGroupPosts(String group_name ) {
-        String sqlQuery = "select * from " + TABLE_NAME_POSTS + " WHERE " + "group_name" + " = ?";
+        String sqlQuery = "select * from " + TABLE_NAME_POSTS + " WHERE " + "artist_group" + " Like '%"+group_name+"%'";
 
 
         SQLiteDatabase db = this.getWritableDatabase( );
